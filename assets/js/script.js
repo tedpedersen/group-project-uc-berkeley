@@ -1,4 +1,4 @@
-// clicking intro buttons to scroll to stats and map
+// clicking intro buttons scrolls to stats and map
 function scrollToStats(div){
     $('html, body').animate({
         scrollTop: $("#stats").offset().top
