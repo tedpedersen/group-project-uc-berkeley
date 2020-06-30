@@ -4,92 +4,52 @@
     <title>Place Autocomplete</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #description {
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-      }
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="assets/css/uikit.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.4/dist/js/uikit.min.js"></script>
+    <script src="assets/js/uikit-icons.min.js"></script>
+    <link href="assets/css/styles.css" rel="stylesheet">
 
-      #infowindow-content .title {
-        font-weight: bold;
-      }
-
-      #infowindow-content {
-        display: none;
-      }
-
-      #map #infowindow-content {
-        display: inline;
-      }
-
-      .pac-card {
-        margin: 10px 10px 0 0;
-        border-radius: 2px 0 0 2px;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        outline: none;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-        background-color: #fff;
-        font-family: Roboto;
-      }
-
-      #pac-container {
-        padding-bottom: 12px;
-        margin-right: 12px;
-      }
-
-      .pac-controls {
-        display: inline-block;
-        padding: 5px 11px;
-      }
-
-      .pac-controls label {
-        font-family: Roboto;
-        font-size: 13px;
-        font-weight: 300;
-      }
-
-      #pac-input {
-        background-color: #fff;
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-        margin-left: 12px;
-        padding: 0 11px 0 13px;
-        text-overflow: ellipsis;
-        width: 400px;
-      }
-
-      #pac-input:focus {
-        border-color: #4d90fe;
-      }
-
-      #title {
-        color: #fff;
-        background-color: #4d90fe;
-        font-size: 25px;
-        font-weight: 500;
-        padding: 6px 12px;
-      }
-    </style>
   </head>
   <body>
+
+      <div class="uk-cover-container centered intro" id="intro">
+        <img src="assets/img/logo.svg" width=100 />
+        <h1>COVID-19 DATAHUB</h1>
+        <p>A free resource to view daily US COVID-19 data and find testing center locations.</p>
+        <div class="uk-button-group">
+          <button class="uk-button uk-button-default" onclick="scrollToStats()">SEE CURRENT STATS</button>
+          <button class="uk-button uk-button-default" onclick="scrollToMap()">FIND A TESTING CENTER</button>
+        </div>
+      </div>
+      <!-- end intro container -->
+
+
+      <div class="uk-cover-container centered stats" id="stats">
+        <h3>DAILY US COVID-19 STATISTICS</h3>
+        <h2>JUNE, 27, 2020</h2>
+        <p>Confirmed: <span>2,510,151</span></p>
+        <p>Deaths: <span>2,510,151</span></p>
+        <p>Recovered: <span>2,510,151</span></p>
+        <p>Active: <span>2,510,151</span></p>
+        <hr class="uk-divider-small">
+        <div class="centered" style="width:300px">
+          <form class="uk-search uk-search-large">
+            <span uk-search-icon></span>
+            <input class="uk-search-input"  type="search" placeholder="Search By State...">
+        </form>
+        </div>
+        <p>-or-</p>
+        <button class="uk-button uk-button-default">SHOW MY LOCATION</button>
+ 
+    </div><!-- end stats container -->
+
     <div class="pac-card" id="pac-card">
       <div>
         <div id="title">
-          Autocomplete search
+          Search for a Testing Center
         </div>
         <div id="type-selector" class="pac-controls">
           <input type="radio" name="type" id="changetype-all" checked="checked">
@@ -120,6 +80,27 @@
       <span id="place-name"  class="title"></span><br>
       <span id="place-address"></span>
     </div>
+    <!-- end map -->
+    <div class="uk-cover-container centered prefs" id="prefs">
+        <h2>YOUR PREFERENCES</h2>
+        <p>This site uses local storage to improve your
+          experience. We do not collect any of your  
+          data.</p> <p>You can view or delete these settings 
+          by clicking “VIEW MY PREFERENCES”.</p>
+          <button uk-toggle="target: #my-id" class="uk-button uk-button-default" type="button">VIEW MY PREFERENCES</button>
+
+        <!-- This is the modal -->
+        <div id="my-id" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body">
+                <h2 class="uk-modal-title">User Preferences</h2>
+                <p>Here we will display what is stored in local storage.</p>
+                <p><a class="uk-link-muted" href="#">Delete My Preferences</a></p>
+                <button class="uk-modal-close uk-button uk-button-default" type="button">Close</button>
+            </div>
+        </div>
+      
+    
+    </div>
 
     <script>
       // This example requires the Places library. Include the libraries=places
@@ -128,8 +109,8 @@
 
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -33.8688, lng: 151.2195},
-          zoom: 13
+          center: {lat: 37.09024, lng:  -95.712891},
+          zoom: 4
         });
         var card = document.getElementById('pac-card');
         var input = document.getElementById('pac-input');
@@ -216,5 +197,18 @@
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5lO6ZjBp8Lwt5abqQ1GQBmVWxEerWGUY&libraries=places&callback=initMap"
         async defer></script>
+        <script>
+          // to scroll to stats and map
+          function scrollToStats(div){
+            $('html, body').animate({
+              scrollTop: $("#stats").offset().top
+            },500);
+          }
+          function scrollToMap(div){
+            $('html, body').animate({
+              scrollTop: $("#pac-card").offset().top
+            },500);
+          }
+          </script>
   </body>
 </html>
