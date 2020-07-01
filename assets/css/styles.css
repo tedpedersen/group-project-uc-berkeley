@@ -90,6 +90,9 @@ p{
 .search-container{
     width: 210px;
 }
+.uk-search-large {
+    width: 210px;
+}
 ::placeholder {
     color: #362A68 !important;
   }
