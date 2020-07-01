@@ -74,19 +74,21 @@ p{
 .intro .uk-button{
     margin: 0 10px;
 }
-
 .stats{
     padding: 40px 0 50px 0;
 }
 .uk-search .uk-search-icon{
     color: #fff;
+    left: -70px;
 }
 .uk-search-large .uk-search-input {
     height: 50px;
     color: #fff;
     font-size: 1.5em;
-    padding-left:25px;
-
+    width: 210px;
+}
+.search-container{
+    width: 210px;
 }
 ::placeholder {
     color: #362A68 !important;
@@ -175,7 +177,6 @@ padding: 6px 12px;
 .uk-cover-container.stats{
     overflow: visible;
 }
-
 .tt-menu {
     font-size: 1.5em;
     text-align: left;
