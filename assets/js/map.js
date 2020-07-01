@@ -94,9 +94,11 @@ function initMap() {
       .then(function (response) {
         if (response.ok) {
           response.json().then(function (data) {
-            
+            console.log(data)
             //loop over each state's data array
             for (var i = 0; i < data.length; i++) {
+              //get location data for later when setting marker
+              var locationName = data[i].name;
               //get a latitude/longitude for each location in data array
               var streetNameAndNumber = data[i].physical_address[0].address_1.split(' ').join('+');
               var mapquestUrl = "https://www.mapquestapi.com/geocoding/v1/address?key=CGM5S6mK5h8rGeCXOD165GEL39leUoI7&location=" + streetNameAndNumber + "+" + data[i].physical_address[0].city + "+"
@@ -110,7 +112,7 @@ function initMap() {
                       //set marker using latLng
                       var marker = new google.maps.Marker({
                         position: latLng,
-                        title:"Hello World!"
+                        title:locationName,
                     });
                     marker.setMap(map);
                     })
