@@ -34,11 +34,11 @@
         <p>Recovered: <span>5,151</span> <span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
         <p>Active: <span>1,510,151</span> <span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
         <hr class="uk-divider-small">
-        <div class="centered" style="width:300px">
+        <div class="centered" style="width:375px">
           <form class="uk-search uk-search-large">
             <span uk-search-icon></span>
-            <input class="uk-search-input"  type="search" placeholder="Search By State...">
-        </form>
+            <input class="uk-search-input typeahead"  type="search" placeholder="Search By State...">
+          </form>
         </div>
         <p>-or-</p>
         <button class="uk-button uk-button-default">SHOW MY LOCATION'S STATS</button>
@@ -105,6 +105,8 @@
     <script src="assets/js/map.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5lO6ZjBp8Lwt5abqQ1GQBmVWxEerWGUY&libraries=places&callback=initMap"
         async defer></script>
+    <!-- typeahead -->
+    <script src="assets/js/typeahead.js"></script>
     <!-- our custom script -->
     <script src="assets/js/script.js"></script>
   </body>
