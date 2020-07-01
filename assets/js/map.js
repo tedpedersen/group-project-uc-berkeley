@@ -99,6 +99,15 @@ function initMap() {
             for (var i = 0; i < data.length; i++) {
               //get location data for later when setting marker
               var locationName = data[i].name;
+              var locationDescription = data[i].description;
+              
+              // var phoneNumber = data[i].phone[0].number;
+              // if (typeof data[i].physical_address[0].address_1 === 'string' || myVar instanceof String) {
+              //   var readableStreetNameNumberCity = data[i].physical_address[0].address_1 + ", " + data[i].physical_address[0].city;
+              // } else {
+              //   var readableStreetNameNumberCity = "Unknown"
+              // }
+
               //get a latitude/longitude for each location in data array
               var streetNameAndNumber = data[i].physical_address[0].address_1.split(' ').join('+');
               var mapquestUrl = "https://www.mapquestapi.com/geocoding/v1/address?key=CGM5S6mK5h8rGeCXOD165GEL39leUoI7&location=" + streetNameAndNumber + "+" + data[i].physical_address[0].city + "+"
@@ -108,13 +117,37 @@ function initMap() {
                     response.json().then(function (data) {
                       var currentLat = data.results[0].locations[0].latLng.lat;
                       var currentLng = data.results[0].locations[0].latLng.lng;
-                      var latLng = {lat: currentLat, lng: currentLng}
+                      var latLng = { lat: currentLat, lng: currentLng }
                       //set marker using latLng
+                      var contentString =
+                        '<div id="content">' +
+                        '<div id="siteNotice">' +
+                        "</div>" +
+                        '<h1 id="firstHeading" class="firstHeading">' + locationName + '</h1>' +
+                        '<div id="bodyContent">' +
+                        "<p>" +
+                        locationDescription +
+
+                        // "<br>" +
+                        // "Address: " + readableStreetNameNumberCity +
+                        // "<br>" +
+                        // "Phone Number: " + phoneNumber +
+                        
+                        "</div>" +
+                        "</div>";
+
+                      var infowindow = new google.maps.InfoWindow({
+                        content: contentString
+                      });
+
                       var marker = new google.maps.Marker({
                         position: latLng,
-                        title:locationName,
-                    });
-                    marker.setMap(map);
+                        map: map,
+                        title: locationName
+                      });
+                      marker.addListener("click", function () {
+                        infowindow.open(map, marker);
+                      });
                     })
                   } else {
                     alert("Error: " + response.statusText);
@@ -122,7 +155,7 @@ function initMap() {
                 })
                 .catch(function (error) {
                   alert("Unable to connect to MapQuest!")
-                  
+
                 })
             }
           })
