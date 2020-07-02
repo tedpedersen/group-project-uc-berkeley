@@ -11,7 +11,8 @@
     <link href="assets/css/styles.css" rel="stylesheet">
 
     <!-- js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.4/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.4/dist/js/uikit-icons.min.js"></script>    
   </head>
@@ -47,13 +48,14 @@
       <div id="stats-container" class="uk-flex uk-flex-column uk-flex-center">
         <div class="section-heading-container">
           <h2 class="section-title">STATISTICS</h2>
-          <h3 class="section-subtitle" id="current-date">June 27, 2020</h3>
+          <h4 id="current-date"></h4>
+          <h3 class="section-subtitle">Cases in <span id="location">the United States</span></h3>
         </div>
-        <div class="stats">
-          <p>Confirmed: <span>210,151</span><span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
-          <p>Deaths: <span>10,151</span><span class="uk-margin-small-right" uk-icon="arrow-down"></span></p>
-          <p>Recovered: <span>5,151</span><span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
-          <p>Active: <span>1,510,151</span><span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
+        <div class="stats" id="case-stats-container">
+          <p>Confirmed: <span id="case-stat-count">210,151</span><span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
+          <p>Deaths: <span id="case-stat-death">10,151</span><span class="uk-margin-small-right" uk-icon="arrow-down"></span></p>
+          <p>Recovered: <span id="case-stat-recovery">5,151</span><span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
+          <p>Active: <span id="case-stat-active">1,510,151</span><span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
         </div>
       </div>
       <div id="stats-search"></div>
@@ -105,7 +107,8 @@
 
     <!-- typeahead -->
     <script src="assets/js/typeahead.js"></script>
-    <!-- our custom script -->
+    <!-- custom js -->
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/stats.js"></script>
   </body>
 </html>
