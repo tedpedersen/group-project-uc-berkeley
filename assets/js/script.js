@@ -1,14 +1,15 @@
 // clicking intro buttons scrolls to stats and map
 function scrollToStats(div){
     $('html, body').animate({
-        scrollTop: $("#stats").offset().top
+        scrollTop: $("#stats").offset().top + -75
 },500);
 }
-function scrollToMap(div){
-    $('html, body').animate({
-        scrollTop: $("#pac-card").offset().top
+function scrollToSaved(div){
+  $('html, body').animate({
+      scrollTop: $("#prefs").offset().top + -75
 },500);
 }
+
 
 //for typeahead 
 

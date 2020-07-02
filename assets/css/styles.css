@@ -203,3 +203,22 @@ padding: 6px 12px;
 .uk-search .uk-search-icon{
     right: 20px;
 }
+
+
+.uk-navbar-container:not(.uk-navbar-transparent) {
+    background-color: #906DE4;
+}
+.uk-navbar-container:not(.uk-navbar-transparent) ul li a{
+    font-family: 'Nunito Sans', sans-serif;
+
+    color: #fff;
+    font-weight: 400;
+    opacity: .7;
+
+}
+ ul.uk-navbar-nav li.uk-active a{
+    font-weight: 700;
+    opacity: 1;
+}
+
+

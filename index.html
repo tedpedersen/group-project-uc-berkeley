@@ -14,6 +14,17 @@
 
   </head>
   <body>
+    <div uk-sticky>
+      <nav class="uk-navbar-container uk-navbar" uk-navbar>
+        <div class="uk-navbar-left">
+            <ul class="uk-navbar-nav">
+                <li class="uk-active" id="homeLink"><a href="#">Current Statistics</a></li>
+                <li><a href="testing-centers.html">Find A Testing Center</a></li>
+                <li><a href="saved-searches.html" id="searchesLink">My Searches</a></li>
+            </ul>
+        </div>
+    </nav>
+    </div>
         <div class="uk-cover-container centered intro" id="intro">
 
           <img src="assets/img/logo.svg" class="uk-animation-scale-up" width=100 />
@@ -21,7 +32,7 @@
           <p>A free resource to view daily US COVID-19 data and find testing center locations.</p>
           <div class="uk-button-group">
             <button class="uk-button uk-button-default" onclick="scrollToStats()">SEE CURRENT STATS</button>
-            <button class="uk-button uk-button-default" onclick="scrollToMap()">FIND A TESTING CENTER</button>
+            <a class="uk-button uk-button-default" href="testing-centers.html" >FIND A TESTING CENTER</a>
           </div>
         </div>
     
@@ -45,66 +56,10 @@
  
     </div><!-- end stats container -->
 
-    <div class="pac-card" id="pac-card">
-      <div>
-        <div id="title">
-          Search for a Testing Center
-        </div>
-        <div id="type-selector" class="pac-controls">
-          <input type="radio" name="type" id="changetype-all" checked="checked">
-          <label for="changetype-all">All</label>
+   
 
-          <input type="radio" name="type" id="changetype-establishment">
-          <label for="changetype-establishment">Establishments</label>
 
-          <input type="radio" name="type" id="changetype-address">
-          <label for="changetype-address">Addresses</label>
 
-          <input type="radio" name="type" id="changetype-geocode">
-          <label for="changetype-geocode">Geocodes</label>
-        </div>
-        <div id="strict-bounds-selector" class="pac-controls">
-          <input type="checkbox" id="use-strict-bounds" value="">
-          <label for="use-strict-bounds">Strict Bounds</label>
-        </div>
-      </div>
-      <div id="pac-container">
-        <input id="pac-input" type="text"
-            placeholder="Enter a location">
-      </div>
-    </div>
-    <div id="map"></div>
-    <div id="infowindow-content">
-      <img src="" width="16" height="16" id="place-icon">
-      <span id="place-name"  class="title"></span><br>
-      <span id="place-address"></span>
-    </div>
-    <!-- end map -->
-
-    <div class="uk-cover-container centered prefs" id="prefs">
-        <h2>SAVED SEARCHES</h2>
-        <p>This site uses local storage to improve your
-          experience. We do not collect any of your  
-          data.</p> <p>You can view or delete these settings 
-          by clicking “SAVED SEARCHES”.</p>
-          <button uk-toggle="target: #my-id" class="uk-button uk-button-default" type="button">SAVED SEARCHES</button>
-          
-        <!-- This is the modal -->
-        <div id="my-id" uk-modal>
-            <div class="uk-modal-dialog uk-modal-body">
-                <h2 class="uk-modal-title">SAVED SEARCHES</h2>
-                <p>Here we will display user searches stored in local storage.</p>
-                <p><a class="uk-link-muted" href="#">Delete My Saved Searches</a></p>
-                <button class="uk-modal-close uk-button uk-button-default" type="button">Close</button>
-            </div>
-        </div>
-    </div>
-    <!-- end user prefs -->
-
-    <!-- our google map script -->
-    <script src="assets/js/map.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5lO6ZjBp8Lwt5abqQ1GQBmVWxEerWGUY&libraries=places&callback=initMap"
-        async defer></script>
     <!-- typeahead -->
     <script src="assets/js/typeahead.js"></script>
     <!-- our custom script -->
