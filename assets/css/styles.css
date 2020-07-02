@@ -146,8 +146,11 @@ ul.uk-navbar-nav li.uk-active a{
 /* hero styles end */
 
 /* stats styles start */
-#new-case-stats p {
+.grid-stat-titles p {
     text-align: left;
+}
+.grid-stat-values p {
+    text-align: right;
 }
 /* stats styles end */
 
