@@ -94,13 +94,13 @@ function initMap() {
       .then(function (response) {
         if (response.ok) {
           response.json().then(function (data) {
-            console.log(data)
+            // console.log(data)
             //loop over each state's data array
             for (var i = 0; i < data.length; i++) {
               //get location data for later when setting marker
               var locationName = data[i].name;
               var locationDescription = data[i].description;
-              
+
               // var phoneNumber = data[i].phone[0].number;
               // if (typeof data[i].physical_address[0].address_1 === 'string' || myVar instanceof String) {
               //   var readableStreetNameNumberCity = data[i].physical_address[0].address_1 + ", " + data[i].physical_address[0].city;
@@ -110,7 +110,10 @@ function initMap() {
 
               //get a latitude/longitude for each location in data array
               var streetNameAndNumber = data[i].physical_address[0].address_1.split(' ').join('+');
-              var mapquestUrl = "https://www.mapquestapi.com/geocoding/v1/address?key=CGM5S6mK5h8rGeCXOD165GEL39leUoI7&location=" + streetNameAndNumber + "+" + data[i].physical_address[0].city + "+"
+              var cityString = data[i].physical_address[0].city
+              cityString = cityString.replace(/\s+/g, '+')
+              var mapquestUrl = "https://www.mapquestapi.com/geocoding/v1/address?key=CGM5S6mK5h8rGeCXOD165GEL39leUoI7&location=" + streetNameAndNumber + "+" + cityString + "+" + statesArray[i]
+              console.log(mapquestUrl)
               fetch(mapquestUrl)
                 .then(function (response) {
                   if (response.ok) {
@@ -118,6 +121,7 @@ function initMap() {
                       var currentLat = data.results[0].locations[0].latLng.lat;
                       var currentLng = data.results[0].locations[0].latLng.lng;
                       var latLng = { lat: currentLat, lng: currentLng }
+
                       //set marker using latLng
                       var contentString =
                         '<div id="content">' +
@@ -168,4 +172,4 @@ function initMap() {
       })
   }
 
-}
+}  
