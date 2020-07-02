@@ -98,8 +98,8 @@ function initMap() {
             //loop over each state's data array
             for (var i = 0; i < data.length; i++) {
               //get location data for later when setting marker
-              var locationName = data[i].name;
-              var locationDescription = data[i].description;
+              const locationName = data[i].name;
+              const locationDescription = data[i].description;
 
               // var phoneNumber = data[i].phone[0].number;
               // if (typeof data[i].physical_address[0].address_1 === 'string' || myVar instanceof String) {
