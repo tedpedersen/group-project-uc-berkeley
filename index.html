@@ -49,13 +49,21 @@
         <div class="section-heading-container">
           <h2 class="section-title">STATISTICS</h2>
           <h4 id="current-date"></h4>
-          <h3 class="section-subtitle">Cases in <span id="location">the United States</span></h3>
+          <h3 class="section-subtitle"><span id="location">Worldwide</span> Cases</h3>
         </div>
-        <div class="stats" id="case-stats-container">
-          <p>Confirmed: <span id="case-stat-count">210,151</span><span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
-          <p>Deaths: <span id="case-stat-death">10,151</span><span class="uk-margin-small-right" uk-icon="arrow-down"></span></p>
-          <p>Recovered: <span id="case-stat-recovery">5,151</span><span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
-          <p>Active: <span id="case-stat-active">1,510,151</span><span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
+        <div class="stats uk-flex uk-flex-around" id="case-stats-container">
+          <div class="stat-bucket" id="new-case-stats">
+            <h4>New</h4>
+            <p>Confirmed: <span id="NewConfirmed"></span><span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
+            <p>Deaths: <span id="NewDeaths"></span><span class="uk-margin-small-right" uk-icon="arrow-down"></span></p>
+            <p>Recovered: <span id="NewRecovered"></span><span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
+          </div>
+          <div class="stat-bucket" id="total-case-stats">
+            <h4>Total</h4>
+            <p>Confirmed: <span id="TotalConfirmed"></span><span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
+            <p>Deaths: <span id="TotalDeaths"></span><span class="uk-margin-small-right" uk-icon="arrow-down"></span></p>
+            <p>Recovered: <span id="TotalRecovered"></span><span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
+          </div>
         </div>
       </div>
       <div id="stats-search"></div>
