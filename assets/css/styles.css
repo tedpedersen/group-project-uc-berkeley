@@ -1,6 +1,7 @@
 /* css variables start */
 :root {
     --dark-purple: #4A1672;
+    --purple: #6F3598;
     --light-purple: #906DE4;
     --lighter-purple: #dcd6f7;
     --lightest-purple: #f4eeff;
@@ -20,6 +21,9 @@ body, h1, h2, h3, p, a {
     font-family: 'Nunito Sans', sans-serif;
     text-align: center;
 }
+a {
+    text-decoration: none;
+}
 h1{
     color: var(--dark-purple);
     font-weight: 700;
@@ -38,10 +42,10 @@ p {
     line-height: 1.5;
 }
 .section-title {
-    color: var(--dark-purple);
+    color: var(--dark-text-color);
 }
 .section-subtitle {
-    color: var(--royal-blue);
+    color: var(--purple);
 }
 /* font formatting end */
 
@@ -59,8 +63,19 @@ p {
     background-color: var(--dark-purple);
     color: var(--light-text-color);
 }
-.hero .uk-button-default{
-    width: 25%;
+.uk-button-text {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 1vw;
+    text-decoration: none;
+    color: var(--light-text-color);
+    font-weight: 400;
+    opacity: .5;
+}
+.uk-button-text:hover {
+    color: var(--light-text-color);
+    text-decoration: none;
+    font-weight: 700;
+    opacity: 1;
 }
 /* cards */
 .uk-card {
@@ -68,12 +83,12 @@ p {
 }
 /* containers */
 .uk-container-expand {
-    background-color: var(--lightest-purple);
-    color: var(--dark-text-color);
-}
-.uk-container-expand:nth-child(2n) {
     background-color: var(--lighter-purple);
     color: var(--grey-text-color);
+}
+.uk-container-expand:nth-child(2n) {
+    background-color: var(--lightest-purple);
+    color: var(--dark-text-color);
 }
 /* cover */
 .uk-cover-container {
@@ -122,23 +137,29 @@ ul.uk-navbar-nav li.uk-active a{
 .hero-subtitle {
     color: var(--dark-text-color);
 }
+.hero .uk-button-default{
+    width: 25%;
+}
 /* hero styles end */
 
 /* stats styles start */
 /* stats styles end */
 
 /* search history styles start */
+.search-history-button {
+    width: auto;
+}
 /* search history styles end */
 
 /* footer styles */
 footer {
     text-align: center;
-    font-size: .8em;
+    font-size: 0.75vw;
     background-color: var(--dark-purple);
     bottom: 0;
 }
-footer p{
-    color: #fff;
+footer p {
+    color: var(--light-text-color);
     opacity: .4;
 }
 /* footer styles end */

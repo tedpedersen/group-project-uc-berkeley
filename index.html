@@ -24,7 +24,7 @@
             <li id="homeLink" class="uk-active"><a href="index.html"><img src="assets/img/logo.svg" width=60/></a></li>
             <li><a href="index.html#stats">Current Statistics</a></li>
             <li><a href="testing-centers.html">Find A Testing Center</a></li>
-            <li><a href="saved-searches.html" id="searchesLink">My Searches</a></li>
+            <li><a uk-toggle="target: #my-id" id="searchesLink">My Search History</a></li>
           </ul>
         </div>
       </nav>
@@ -40,9 +40,10 @@
         <a class="uk-button uk-button-default" href="#stats">Check Statistics</a>
         <a class="uk-button uk-button-default uk-margin-left" href="testing-centers.html">Find a Testing Center</a>
       </div>
+      <div id="stats"></div>
     </section>
 
-    <section class="uk-container-expand uk-padding" id="stats">
+    <section class="uk-container-expand uk-padding">
       <div id="stats-container" class="uk-flex uk-flex-column uk-flex-center">
         <div class="section-heading-container">
           <h2 class="section-title">STATISTICS</h2>
@@ -55,9 +56,10 @@
           <p>Active: <span>1,510,151</span><span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
         </div>
       </div>
+      <div id="stats-search"></div>
     </section>
       
-    <section class="uk-container-expand uk-padding" id="stats-search">
+    <section class="uk-container-expand uk-padding">
       <div class="uk-container">
         <h2 class="section-title">Search for Other Statistics</h2>
         <div id="stats-container" class="uk-flex uk-flex-center uk-padding">
@@ -83,9 +85,23 @@
     </section>
 
     <footer class="uk-padding">
+      <p>This site uses local storage to improve your experience. We do not collect or use any of your data.</p>
+      <button uk-toggle="target: #my-id" class="uk-button uk-button-text">
+        Click here to view your search history.
+      </button>
       <p>Built With &#10084; By Vincent Caruso, Jeffrey Dollente, Vanessa Lane, & Ted Pedersen</p>
-      <p>Copyright &copy;2020</p> 
+      <p>Copyright &copy;2020</p>
     </footer>
+
+      <!-- search history modal -->
+    <div id="my-id" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+            <h2 class="uk-modal-title">SEARCH HISTORY</h2>
+            <p>Here we will display user searches stored in local storage.</p>
+            <p><a class="uk-link-muted" href="#">Delete My Search History</a></p>
+            <button class="uk-modal-close uk-button uk-button-default" type="button">Close</button>
+        </div>
+    </div>
 
     <!-- typeahead -->
     <script src="assets/js/typeahead.js"></script>

@@ -24,7 +24,7 @@
             <li id="homeLink"><a href="index.html"><img src="assets/img/logo.svg" width=60/></a></li>
             <li><a href="index.html#stats">Current Statistics</a></li>
             <li class="uk-active"><a href="testing-centers.html">Find A Testing Center</a></li>
-            <li><a href="saved-searches.html" id="searchesLink">My Searches</a></li>
+            <li><a uk-toggle="target: #my-id" id="searchesLink">My Search History</a></li>
           </ul>
         </div>
         <div class="uk-navbar-right">
@@ -69,9 +69,23 @@
     <!-- end map -->
 
     <footer class="uk-padding">
+      <p>This site uses local storage to improve your experience. We do not collect or use any of your data.</p>
+      <button uk-toggle="target: #my-id" class="uk-button uk-button-text">
+        Click here to view your search history.
+      </button>
       <p>Built With &#10084; By Vincent Caruso, Jeffrey Dollente, Vanessa Lane, & Ted Pedersen</p>
-      <p>Copyright &copy;2020</p> 
+      <p>Copyright &copy;2020</p>
     </footer>
+
+    <!-- search history modal -->
+    <div id="my-id" uk-modal>
+      <div class="uk-modal-dialog uk-modal-body">
+        <h2 class="uk-modal-title">SEARCH HISTORY</h2>
+        <p>Here we will display user searches stored in local storage.</p>
+        <p><a class="uk-link-muted" href="#">Delete My Search History</a></p>
+        <button class="uk-modal-close uk-button uk-button-default" type="button">Close</button>
+      </div>
+    </div>
 
     <!-- our google map script -->
     <script src="assets/js/map.js"></script>
