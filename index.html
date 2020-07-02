@@ -31,7 +31,7 @@
       </nav>
     </section>
 
-    <section class="uk-cover-container hero uk-flex uk-flex-column uk-flex-center uk-padding-large" id="hero">
+    <section class="uk-cover-container hero uk-flex uk-flex-column uk-flex-middle uk-flex-center uk-padding-large" id="hero">
       <div class="hero-text uk-margin">
         <img src="assets/img/logo.svg" class="uk-animation-scale-up" width=100 />
         <h1 class="hero-title uk-animation-scale-up">COVID-19 DATAHUB</h1>
@@ -53,14 +53,14 @@
         <div class="section-heading-container">
           <h2 class="section-title">STATISTICS</h2>
           <h4 id="current-date"></h4>
-          <h3 class="section-subtitle"><span id="location">Worldwide</span> Cases</h3>
+          <h3 class="section-subtitle uk-margin-bottom"><span id="location">Worldwide</span> Cases</h3>
         </div>
 
         <!-- stats body -->
-        <div class="stats uk-flex uk-flex-around" id="case-stats-container">
+        <div class="stats uk-grid" id="case-stats-container">
 
           <!-- new stats -->
-          <div class="stat-bucket" id="new-case-stats-container">
+          <div class="stat-bucket uk-card uk-card-default uk-padding" id="new-case-stats-container">
             <h3>New</h3>
             <div id="new-case-stats-grid" class="uk-grid">
               <div class="grid-stat-titles">
@@ -77,7 +77,7 @@
           </div>
 
           <!-- total stats -->
-          <div class="stat-bucket" id="total-case-stats-container">
+          <div class="stat-bucket uk-card uk-card-default uk-padding uk-margin-left" id="total-case-stats-container">
             <h3>Totals</h3>
             <div id="new-case-stats-grid" class="uk-grid stats-left-align">
               <div class="grid-stat-titles">
