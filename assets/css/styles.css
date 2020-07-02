@@ -52,7 +52,7 @@ p {
 /* override ui kit styles */
 /* buttons */
 .uk-button {
-    font-size: 1vw;
+    font-size: inherit;
 }
 .uk-button-default {
     padding: 5px 15px;
@@ -278,7 +278,7 @@ html, body {
     h3 {
         font-size: 5vw;
     }
-    p {
+    p, .uk-button-text {
         font-size: 3vw;
     }
     .uk-card {
@@ -286,12 +286,19 @@ html, body {
     }
     .uk-flex {
         flex-direction: column;
+        align-items: center;
     }
     .uk-container {
         margin: 0px;
     }
     .uk-cover-container {
         height: auto;
+    }
+
+    .hero .uk-button-default{
+        width: 100%;
+        padding-right: 30px;
+        padding-left: 30px;
     }
     .uk-button-default:hover {
         background-color: var(--light-purple);
@@ -313,7 +320,13 @@ html, body {
     h3 {
         font-size: 7.5vw;
     }
-    p {
+    p, .uk-button-text {
         font-size: 5vw;
+    }
+    .hero .uk-button-default{
+        width: 100%;
+    }
+    #homeLink {
+        display: none;
     }
 }
