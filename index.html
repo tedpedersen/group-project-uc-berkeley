@@ -1,66 +1,107 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>COVID-19 DATAHUB</title>
+    <title>COVID-19 Datahub</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
+
+    <!-- css -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;900&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="assets/css/uikit.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.4/dist/js/uikit.min.js"></script>
-    <script src="assets/js/uikit-icons.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.4/dist/css/uikit.min.css" />
     <link href="assets/css/styles.css" rel="stylesheet">
 
+    <!-- js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.4/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.4/dist/js/uikit-icons.min.js"></script>    
   </head>
-  <body>
-    <div uk-sticky>
-      <nav class="uk-navbar-container uk-navbar" uk-navbar>
-        <div class="uk-navbar-left">
-            <ul class="uk-navbar-nav">
-                <li class="uk-active" id="homeLink"><a href="#">Current Statistics</a></li>
-                <li><a href="testing-centers.html">Find A Testing Center</a></li>
-                <li><a href="saved-searches.html" id="searchesLink">My Searches</a></li>
-            </ul>
-        </div>
-    </nav>
-    </div>
-        <div class="uk-cover-container centered intro" id="intro">
 
-          <img src="assets/img/logo.svg" class="uk-animation-scale-up" width=100 />
-          <h1 class="uk-animation-scale-up">COVID-19 DATAHUB</h1>
-          <p>A free resource to view daily US COVID-19 data and find testing center locations.</p>
-          <div class="uk-button-group">
-            <button class="uk-button uk-button-default" onclick="scrollToStats()">SEE CURRENT STATS</button>
-            <a class="uk-button uk-button-default" href="testing-centers.html" >FIND A TESTING CENTER</a>
-          </div>          <div id="offsetTop"></div> 
+  <body>
+    <section uk-sticky>
+      <nav class="uk-navbar-container uk-navbar uk-padding-small" uk-navbar>
+        <div class="uk-navbar-left">
+          <ul class="uk-navbar-nav">
+            <li id="homeLink" class="uk-active"><a href="index.html"><img src="assets/img/logo.svg" width=60/></a></li>
+            <li><a href="index.html#stats">Current Statistics</a></li>
+            <li><a href="testing-centers.html">Find A Testing Center</a></li>
+            <li><a uk-toggle="target: #my-id" id="searchesLink">My Search History</a></li>
+          </ul>
         </div>
-     
-  
-      <!-- end intro container -->
-      <div class="uk-cover-container centered stats" id="stats">
-        <h3>DAILY US COVID-19 STATISTICS</h3>
-        <h2>JUNE, 27, 2020</h2>
-        <p>Confirmed: <span>210,151</span> <span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
-        <p>Deaths: <span>10,151</span> <span class="uk-margin-small-right" uk-icon="arrow-down"></span></p>
-        <p>Recovered: <span>5,151</span> <span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
-        <p>Active: <span>1,510,151</span> <span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
-        <hr class="uk-divider-small">
-        <div class="centered state-search-container">
-          <form class="uk-search uk-search-large">
-            <span uk-search-icon></span> 
-            <input class="uk-search-input typeahead"  type="search" placeholder="Search By State...">
-          </form>
+      </nav>
+    </section>
+
+    <section class="uk-cover-container hero uk-flex uk-flex-column uk-flex-center uk-padding-large" id="hero">
+      <div class="hero-text uk-margin">
+        <img src="assets/img/logo.svg" class="uk-animation-scale-up" width=100 />
+        <h1 class="hero-title uk-animation-scale-up">COVID-19 DATAHUB</h1>
+        <p class="hero-subtitle">A free resource to view daily US COVID-19 data and find testing center locations.</p>
+      </div>
+      <div class="uk-button-group uk-flex uk-flex-center hero-buttons">
+        <a class="uk-button uk-button-default" href="#stats">Check Statistics</a>
+        <a class="uk-button uk-button-default uk-margin-left" href="testing-centers.html">Find a Testing Center</a>
+      </div>
+      <div id="stats"></div>
+    </section>
+
+    <section class="uk-container-expand uk-padding-large">
+      <div id="stats-container" class="uk-flex uk-flex-column uk-flex-center">
+        <div class="section-heading-container">
+          <h2 class="section-title">STATISTICS</h2>
+          <h3 class="section-subtitle" id="current-date">June 27, 2020</h3>
         </div>
-        <p>-or-</p>
-        <button class="uk-button uk-button-default">SHOW MY LOCATION'S STATS</button>
- 
-    </div><!-- end stats container -->
-    <footer class="uk-container centered">
+        <div class="stats">
+          <p>Confirmed: <span>210,151</span><span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
+          <p>Deaths: <span>10,151</span><span class="uk-margin-small-right" uk-icon="arrow-down"></span></p>
+          <p>Recovered: <span>5,151</span><span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
+          <p>Active: <span>1,510,151</span><span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
+        </div>
+      </div>
+      <div id="stats-search"></div>
+    </section>
+      
+    <section class="uk-container-expand uk-padding-large">
+      <div class="uk-container">
+        <h2 class="section-title">Search for Other Statistics</h2>
+        <div id="stats-container" class="uk-flex uk-flex-center uk-padding">
+          <div class="uk-card uk-card-default uk-padding">
+            <h3 class="section-subtitle">By Specific State</h3>
+            <p class="uk-margin">
+              Input a state below to search for stats based on a specific location
+            </p>
+            <form class="uk-search uk-search-default uk-form-large">
+              <a href="" class="uk-search-icon-flip uk-margin-small-right" uk-search-icon></a>
+              <input class="uk-search-input " type="search" placeholder="Search by state">
+            </form>
+          </div>
+          <div class="uk-card uk-card-default uk-margin-left uk-padding">
+            <h3 class="section-subtitle">By Current Location</h3>
+            <p class="uk-margin">
+              Click the button below to display stats based on your current location.
+            </p>
+            <button class="uk-button uk-button-default">Use My Location</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="uk-padding">
+      <p>This site uses local storage to improve your experience. We do not collect or use any of your data.</p>
+      <button uk-toggle="target: #my-id" class="uk-button uk-button-text">
+        Click here to view your search history.
+      </button>
       <p>Built With &#10084; By Vincent Caruso, Jeffrey Dollente, Vanessa Lane, & Ted Pedersen</p>
-      <p>Copyright &copy;2020</p> 
+      <p>Copyright &copy;2020</p>
     </footer>
 
+      <!-- search history modal -->
+    <div id="my-id" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+            <h2 class="uk-modal-title">SEARCH HISTORY</h2>
+            <p>Here we will display user searches stored in local storage.</p>
+            <p><a class="uk-link-muted" href="#">Delete My Search History</a></p>
+            <button class="uk-modal-close uk-button uk-button-default" type="button">Close</button>
+        </div>
+    </div>
 
     <!-- typeahead -->
     <script src="assets/js/typeahead.js"></script>

@@ -1,18 +1,4 @@
-// clicking intro buttons scrolls to stats and map
-function scrollToStats(div){
-    $('html, body').animate({
-        scrollTop: $("#stats").offset().top + -75
-},500);
-}
-function scrollToSaved(div){
-  $('html, body').animate({
-      scrollTop: $("#prefs").offset().top + -75
-},500);
-}
-
-
-//for typeahead 
-
+// for typeahead 
 var substringMatcher = function(strs) {
     return function findMatches(q, cb) {
       var matches, substringRegex;
