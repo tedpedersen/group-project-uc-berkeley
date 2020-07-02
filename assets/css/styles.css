@@ -51,6 +51,9 @@ p {
 
 /* override ui kit styles */
 /* buttons */
+.uk-button {
+    font-size: 1vw;
+}
 .uk-button-default {
     padding: 5px 15px;
     background-color: var(--light-purple);
