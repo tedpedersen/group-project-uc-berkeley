@@ -112,14 +112,14 @@ function initMap() {
               var streetNameAndNumber = data[i].physical_address[0].address_1.split(' ').join('+');
               var cityString = data[i].physical_address[0].city
               cityString = cityString.replace(/\s+/g, '+')
-              var mapquestUrl = "https://www.mapquestapi.com/geocoding/v1/address?key=CGM5S6mK5h8rGeCXOD165GEL39leUoI7&location=" + streetNameAndNumber + "+" + cityString + "+" + statesArray[i]
-              console.log(mapquestUrl)
-              fetch(mapquestUrl)
-                .then(function (response) {
-                  if (response.ok) {
-                    response.json().then(function (data) {
-                      var currentLat = data.results[0].locations[0].latLng.lat;
-                      var currentLng = data.results[0].locations[0].latLng.lng;
+              var geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + streetNameAndNumber + ",+" + cityString + ",+" + statesArray[i] + "&key=AIzaSyC5lO6ZjBp8Lwt5abqQ1GQBmVWxEerWGUY"
+              fetch(geocodeUrl)
+              .then(function (response) {
+                if (response.ok) {
+                  response.json().then(function (data) {
+                    console.log(data)
+                      var currentLat = data.results[0].geometry.location.lat;
+                      var currentLng = data.results[0].geometry.location.lng;
                       var latLng = { lat: currentLat, lng: currentLng }
 
                       //set marker using latLng
