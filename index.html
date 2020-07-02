@@ -12,8 +12,8 @@
 
     <!-- js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.4/dist/js/uikit-icons.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.4/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.4/dist/js/uikit-icons.min.js"></script>    
   </head>
 
   <body>
@@ -30,7 +30,7 @@
       </nav>
     </section>
 
-    <section class="uk-cover-container hero uk-flex uk-flex-column uk-flex-center" id="hero">
+    <section class="uk-cover-container hero uk-flex uk-flex-column uk-flex-center uk-padding" id="hero">
       <div class="hero-text uk-margin">
         <img src="assets/img/logo.svg" class="uk-animation-scale-up" width=100 />
         <h1 class="hero-title uk-animation-scale-up">COVID-19 DATAHUB</h1>
@@ -42,7 +42,7 @@
       </div>
     </section>
 
-    <section class="uk-container uk-padding">
+    <section class="uk-container-expand uk-padding" id="stats">
       <div id="stats-container" class="uk-flex uk-flex-column uk-flex-center">
         <div class="section-heading-container">
           <h2 class="section-title">STATISTICS</h2>
@@ -57,32 +57,33 @@
       </div>
     </section>
       
-    <section class="uk-container uk-padding " id="stats-search">
-      <h2 class="section-title">Search for Other Statistics</h2>
-      <div id="stats-container" class="uk-flex uk-flex-center uk-padding">
-        <div class="uk-card uk-card-default uk-padding">
-          <h3 class="section-subtitle">By Specific State</h3>
-          <p class="uk-margin-top uk-margin-bottom">
-            Input a state below to search for stats based on a specific location
-          </p>
-          <form class="uk-search uk-search-default uk-form-large">
-            <a href="" class="uk-search-icon-flip uk-margin-small-right" uk-search-icon></a>
-            <input class="uk-search-input " type="search" placeholder="Search by state">
-          </form>
-        </div>
-        <div class="uk-card uk-card-default uk-margin-left uk-padding">
-          <h3 class="section-subtitle">By Current Location</h3>
-          <p class="uk-margin-top uk-margin-bottom">
-            Input a state below to search for stats based on a specific location
-          </p>
-          <button class="uk-button uk-button-default">SHOW MY LOCATION'S STATS</button>
+    <section class="uk-container-expand uk-padding" id="stats-search">
+      <div class="uk-container">
+        <h2 class="section-title">Search for Other Statistics</h2>
+        <div id="stats-container" class="uk-flex uk-flex-center uk-padding">
+          <div class="uk-card uk-card-default uk-padding">
+            <h3 class="section-subtitle">By Specific State</h3>
+            <p class="uk-margin">
+              Input a state below to search for stats based on a specific location
+            </p>
+            <form class="uk-search uk-search-default uk-form-large">
+              <a href="" class="uk-search-icon-flip uk-margin-small-right" uk-search-icon></a>
+              <input class="uk-search-input " type="search" placeholder="Search by state">
+            </form>
+          </div>
+          <div class="uk-card uk-card-default uk-margin-left uk-padding">
+            <h3 class="section-subtitle">By Current Location</h3>
+            <p class="uk-margin">
+              Click the button below to display stats based on your current location.
+            </p>
+            <button class="uk-button uk-button-default">Use My Location</button>
+          </div>
         </div>
       </div>
     </section>
 
     <footer class="uk-padding">
-      <p>Built With &#10084; By 
-        <a href="">Vincent Caruso</a>, Jeffrey Dollente, Vanessa Lane, & Ted Pedersen</p>
+      <p>Built With &#10084; By Vincent Caruso, Jeffrey Dollente, Vanessa Lane, & Ted Pedersen</p>
       <p>Copyright &copy;2020</p> 
     </footer>
 

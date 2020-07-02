@@ -24,18 +24,13 @@ h1{
     color: var(--dark-purple);
     font-weight: 700;
     text-shadow: 2px 2px 2px #fff;
-    margin: 0;
-    padding: 0;
     font-size: 4em;
 }
 h2 {
-    margin: 0px;
     font-size: 3em;
 }
 h3 {
     font-size: 2em;
-    margin: 0;
-    padding: 0;
 }
 p {
     font-weight: 400;
@@ -58,23 +53,27 @@ p {
     color: var(--light-text-color);
     border: none;
     border-radius: 4px;
+    width: 80%;
 }
 .uk-button-default:hover {
     background-color: var(--dark-purple);
     color: var(--light-text-color);
+}
+.hero .uk-button-default{
+    width: 25%;
 }
 /* cards */
 .uk-card {
     border-radius: 4px;
 }
 /* containers */
-.uk-container {
-    background-color: var(--lighter-purple);
-    color: var(--grey-text-color);
-}
-.uk-container:nth-child(2n) {
+.uk-container-expand {
     background-color: var(--lightest-purple);
     color: var(--dark-text-color);
+}
+.uk-container-expand:nth-child(2n) {
+    background-color: var(--lighter-purple);
+    color: var(--grey-text-color);
 }
 /* cover */
 .uk-cover-container {
@@ -86,7 +85,7 @@ p {
 }
 /* forms */
 .uk-form-large {
-    width: 100%;
+    width: 80%;
 }
 /* navbar */
 .uk-navbar-container:not(.uk-navbar-transparent) {
@@ -129,11 +128,6 @@ ul.uk-navbar-nav li.uk-active a{
 /* stats styles end */
 
 /* search history styles start */
-/* .prefs {
-    padding: 50px 0;
-    background: var(--dark-purple);
-    margin-bottom: 10%;
-} */
 /* search history styles end */
 
 /* footer styles */
@@ -158,8 +152,6 @@ footer p{
 /* Optional: Makes the sample page fill the window. */
 html, body {
     height: 100%;
-    margin: 0;
-    padding: 0;
 }
 #description {
     font-size: 15px;
@@ -252,4 +244,52 @@ html, body {
 .tt-cursor{
     color: #fff;
     background-color: #906DE4;
+}
+
+/* Tablets and Smaller */
+@media screen and (max-width: 768px) {
+    h2 {
+        font-size: 6vw;
+    }
+    h3 {
+        font-size: 5vw;
+    }
+    p {
+        font-size: 3vw;
+    }
+    .uk-card {
+        width: 100%;
+    }
+    .uk-flex {
+        flex-direction: column;
+    }
+    .uk-container {
+        margin: 0px;
+    }
+    .uk-cover-container {
+        height: auto;
+    }
+    .uk-button-default:hover {
+        background-color: var(--light-purple);
+    }
+    .uk-margin-left {
+        margin-left: 0px!important;
+        margin-top: 20px;
+    }
+    #stats-container {
+        padding: 0px;
+    }
+}
+
+/* Mobile Phones and Smaller */
+@media screen and (max-width: 575px) {
+    h2 {
+        font-size: 9vw;
+    }
+    h3 {
+        font-size: 7.5vw;
+    }
+    p {
+        font-size: 5vw;
+    }
 }

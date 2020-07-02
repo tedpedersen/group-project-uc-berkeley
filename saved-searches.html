@@ -32,7 +32,7 @@
       </nav>
     </section>
 
-    <section class="uk-cover-container hero uk-flex uk-flex-column uk-flex-center" id="hero">
+    <section class="uk-cover-container hero uk-flex uk-flex-column uk-flex-center uk-padding" id="hero">
       <div class="hero-text uk-margin">
         <h1 class="hero-title uk-animation-scale-up">SAVED SEARCHES</h1>
         <p class="hero-subtitle">This site uses local storage to improve your experience.</p>
@@ -43,17 +43,16 @@
         <button uk-toggle="target: #my-id" class="uk-button uk-button-default" type="button">SAVED SEARCHES</button>
       </div>
     </section>
-        
   
-        <!-- This is the modal -->
-        <div id="my-id" uk-modal>
-            <div class="uk-modal-dialog uk-modal-body">
-                <h2 class="uk-modal-title">SAVED SEARCHES</h2>
-                <p>Here we will display user searches stored in local storage.</p>
-                <p><a class="uk-link-muted" href="#">Delete My Saved Searches</a></p>
-                <button class="uk-modal-close uk-button uk-button-default" type="button">Close</button>
-            </div>
+    <!-- This is the modal -->
+    <div id="my-id" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+            <h2 class="uk-modal-title">SAVED SEARCHES</h2>
+            <p>Here we will display user searches stored in local storage.</p>
+            <p><a class="uk-link-muted" href="#">Delete My Saved Searches</a></p>
+            <button class="uk-modal-close uk-button uk-button-default" type="button">Close</button>
         </div>
+    </div>
 
     <footer class="uk-padding">
       <p>Built With &#10084; By Vincent Caruso, Jeffrey Dollente, Vanessa Lane, & Ted Pedersen</p>
