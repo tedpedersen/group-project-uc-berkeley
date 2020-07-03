@@ -57,18 +57,18 @@
         </div>
 
         <!-- stats body -->
-        <div class="stats uk-grid" id="case-stats-container">
+        <div class="stats uk-grid uk-margin-large-bottom uk-margin-top" id="case-stats-container">
 
           <!-- new stats -->
-          <div class="stat-bucket uk-card uk-card-default uk-padding" id="new-case-stats-container">
-            <h3>New</h3>
-            <div id="new-case-stats-grid" class="uk-grid">
+          <div class="stat-bucket uk-card uk-card-default uk-card-body uk-padding" id="new-case-stats-container">
+            <h3>New Cases</h3>
+            <div id="new-case-stats-grid" class="uk-grid uk-child-width-expand">
               <div class="grid-stat-titles">
                 <p>Confirmed:</p>
                 <p>Deaths:</p>
                 <p>Recovered:</p>
               </div>
-              <div id="new-case-stat-values" class="grid-stat-values">
+              <div class="grid-stat-values uk-width-auto" id="new-case-stat-values">
                 <p id="NewConfirmed"></p>
                 <p id="NewDeaths"></p>
                 <p id="NewRecovered"></p>
@@ -77,15 +77,15 @@
           </div>
 
           <!-- total stats -->
-          <div class="stat-bucket uk-card uk-card-default uk-padding uk-margin-left" id="total-case-stats-container">
-            <h3>Totals</h3>
-            <div id="new-case-stats-grid" class="uk-grid stats-left-align">
+          <div class="stat-bucket uk-card uk-card-default uk-card-body uk-margin-left" id="total-case-stats-container">
+            <h3>Total Cases</h3>
+            <div id="new-case-stats-grid uk-width-auto" class="uk-grid uk-child-width-expand">
               <div class="grid-stat-titles">
                 <p>Confirmed:</p>
                 <p>Deaths:</p>
                 <p>Recovered:</p>
               </div>
-              <div id="total-case-stat-values" class="grid-stat-values">
+              <div class="grid-stat-values uk-width-auto" id="total-case-stat-values">
                 <p id="TotalConfirmed"></p>
                 <p id="TotalDeaths"></p>
                 <p id="TotalRecovered"></p>
@@ -101,10 +101,10 @@
     </section>
       
     <section class="uk-container-expand uk-padding-large">
-      <div class="uk-container">
+      <div class="uk-container uk-margin-large-bottom uk-margin-top">
         <h2 class="section-title">Search for Other Statistics</h2>
         <div id="stats-container" class="uk-flex uk-flex-center uk-padding">
-          <div class="uk-card uk-card-default uk-padding">
+          <div class="uk-card uk-card-default uk-card-body">
             <h3 class="section-subtitle">By Specific State</h3>
             <p class="uk-margin">
               Input a state below to search for stats based on a specific location
@@ -114,7 +114,7 @@
               <input class="uk-search-input " type="search" placeholder="Search by state">
             </form>
           </div>
-          <div class="uk-card uk-card-default uk-margin-left uk-padding">
+          <div class="uk-card uk-card-default uk-margin-left uk-card-body">
             <h3 class="section-subtitle">By Current Location</h3>
             <p class="uk-margin">
               Click the button below to display stats based on your current location.
