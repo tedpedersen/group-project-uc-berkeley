@@ -1,7 +1,8 @@
 // helper functions
-var surfaceGlobalData = function(summaryData) {
-
-    console.log(summaryData);
+var surfaceData = function(summaryData) {
+    /**
+     * Surfaces global data
+     */
 
     // get yesterday's data
     var yesterdayData = summaryData[0];
@@ -43,49 +44,43 @@ var surfaceGlobalData = function(summaryData) {
 // api calls
 var getGlobalData = function() {
     /**
-     * Surfaces global stats
+     * Gets global stats from the covid19 API. Docs: https://documenter.getpostman.com/view/10808728/SzS8rjbc?version=latest
      **/
 
-    // fetch data from the last 48h
-    var apiUrl = "https://api.covid19api.com/world?from=" + yesterday + "T00:00:00.000Z&to=" + today + "T23:59:59.999Z";
+    var apiUrl = "https://api.covid19api.com/world?from=" + yesterday + "T00:00:00Z&to=" + today + "T23:59:59Z";
     fetch(apiUrl).then(function(res) {
         if(res.ok) {
             res.json().then(function(summaryData) {
-                surfaceGlobalData(summaryData, location);
+                surfaceData(summaryData);
             })
         } else {
             console.log(res.text);
         }
     })
 }
+
 var getLocalData = function(country) {
     /**
-     * Surfaces global stats
+     * Gets local stats from the covid19 API. Docs: https://documenter.getpostman.com/view/10808728/SzS8rjbc?version=latest
      **/
 
-    // fetch totals from the last 48h
-    var apiUrl = "https://api.covid19api.com/total/country/" + country + "?from=" + yesterday + "T00:00:00.000Z&to=" + today + "T23:59:59.999Z";
+    var apiUrl = "https://api.covid19api.com/total/country/" + country + "?from=" + yesterday + "T00:00:00Z&to=" + today + "T23:59:59Z";
     fetch(apiUrl).then(function(res) {
         if(res.ok) {
-            res.json().then(function(data) {
-                for (let i=0; i < data.length; i++) {
+            res.json().then(function(summaryData) {
+                for (let i = 0; i < summaryData.length; i++) {
 
-                    // format the response data so that it aligns with our dom element IDs
-                    var statObject = {
-                        TotalConfirmed: data[i].Confirmed.toLocaleString(),
-                        TotalDeaths: data[i].Deaths.toLocaleString(),
-                        TotalRecovered: data[i].Recovered.toLocaleString()
-                    };
+                    // fix keys to match the global stats response
+                    summaryData[i].NewConfirmed = summaryData[i].Confirmed;
+                    delete summaryData[i].Confirmed;
+                    
+                    summaryData[i].NewDeaths = summaryData[i].Deaths;
+                    delete summaryData[i].Deaths;
 
-                    // add the data to the dom
-                    var statNames = Object.entries(statObject);
-                    console.log(statNames);
-                    for (let j=0; j < statNames.length; j++) {
-                        var statName = statNames[j][0]
-                        var statValue = statNames[j][1]
-                        $("#" + statName).text(statValue)
-                    }
+                    summaryData[i].NewRecovered = summaryData[i].Recovered;
+                    delete summaryData[i].Recovered;
                 }
+                surfaceData(summaryData);
             })
         } else {
             console.log(res.text);
@@ -105,6 +100,8 @@ var searchBox = new google.maps.places.SearchBox(input, {
 
 // event listeners
 searchBox.addListener('places_changed', function() {
+    /* Google Maps autocomplete location selection handler */
+    
     // get the data from the search box
     var places = searchBox.getPlaces();
     var addressComponents = places[0].address_components;
