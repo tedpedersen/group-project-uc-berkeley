@@ -119,42 +119,44 @@ function initMap() {
                 .then(function (response) {
                   if (response.ok) {
                     response.json().then(function (data) {
-                      var currentLat = data.results[0].geometry.location.lat;
-                      var currentLng = data.results[0].geometry.location.lng;
-                      var latLng = { lat: currentLat, lng: currentLng }
+                      if (data.results.length > 0) {
+                        var currentLat = data.results[0].geometry.location.lat;
+                        var currentLng = data.results[0].geometry.location.lng;
+                        var latLng = { lat: currentLat, lng: currentLng }
 
-                      //create info window and append to marker
-                      var contentString =
-                        '<div id="content">' +
-                        '<div id="siteNotice">' +
+                        //create info window and append to marker
+                        var contentString =
+                          '<div id="content">' +
+                          '<div id="siteNotice">' +
+                          "</div>" +
+                          '<h1 id="firstHeading" class="firstHeading">' + locationName + '</h1>' +
+                          '<div id="infoWindowBodyContent">' +
+                          "<p>" +
+                          locationDescription +
+                          "<br>" + "<p/>" + "<br>" +
+                          "Address: " + readableStreetNameNumberCity +
+                          "<br>" +
+                          "Phone Number: " + phoneNumber +
+                          "</p>"
                         "</div>" +
-                        '<h1 id="firstHeading" class="firstHeading">' + locationName + '</h1>' +
-                        '<div id="infoWindowBodyContent">' +
-                        "<p>" +
-                        locationDescription +
-                        "<br>" + "<p/>" + "<br>" +
-                        "Address: " + readableStreetNameNumberCity +
-                        "<br>" +
-                        "Phone Number: " + phoneNumber +
-                        "</p>"
-                        "</div>" +
-                        "</div>"
-                      var infowindow = new google.maps.InfoWindow({
-                        content: contentString
-                      });
+                          "</div>"
+                        var infowindow = new google.maps.InfoWindow({
+                          content: contentString
+                        });
 
-                      //set marker using latLng
-                      var marker = new google.maps.Marker({
-                        position: latLng,
-                        map: map,
-                        title: locationName
-                      });
-                      marker.addListener("click", function () {
-                        infowindow.open(map, marker);
-                      });
-                      map.addListener("click", function () {
-                        infowindow.close();
-                      });
+                        //set marker using latLng
+                        var marker = new google.maps.Marker({
+                          position: latLng,
+                          map: map,
+                          title: locationName
+                        });
+                        marker.addListener("click", function () {
+                          infowindow.open(map, marker);
+                        });
+                        map.addListener("click", function () {
+                          infowindow.close();
+                        });
+                      }
                     })
                   } else {
                     alert("Error: " + response.statusText);
