@@ -1,4 +1,4 @@
-//no data for South Dakota or Rhode Island :(
+//no data available for South Dakota or Rhode Island
 var statesArray = ['alabama', 'alaska', 'arizona', 'arkansas', 'california', 'colorado', 'connecticut', 'delaware', 'florida', 'georgia', 'hawaii', 'idaho', 'illinois', 'indiana', 'iowa', 'kansas', 'kentucky', 'louisiana', 'maine', 'maryland', 'massachusetts', 'michigan', 'minnesota', 'mississippi', 'missouri', 'montana', 'nebraska', 'nevada', 'new-hampshire', 'new-jersey', 'new-mexico', 'new-york', 'north-carolina', 'north-dakota', 'ohio', 'oklahoma', 'oregon', 'pennsylvania', 'south-carolina', 'tennessee', 'texas', 'utah', 'vermont', 'virginia', 'washington', 'west-virginia', 'wisconsin', 'wyoming']
 
 function initMap() {
@@ -94,13 +94,13 @@ function initMap() {
       .then(function (response) {
         if (response.ok) {
           response.json().then(function (data) {
-            // console.log(data)
+
             //loop over each state's data array
             for (var i = 0; i < data.length; i++) {
-              //get location data for later when setting marker
+
+              //get location data for later (when setting marker)
               const locationName = data[i].name;
               const locationDescription = data[i].description;
-              console.log(data)
 
               if (typeof data[i].physical_address[0].address_1 === 'string' || myVar instanceof String) {
                 var readableStreetNameNumberCity = data[i].physical_address[0].address_1 + ", " + data[i].physical_address[0].city;
@@ -120,14 +120,14 @@ function initMap() {
               cityString = cityString.replace(/\s+/g, '+')
               var geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + streetNameAndNumber + ",+" + cityString + ",+" + statesArray[i] + "&key=AIzaSyC5lO6ZjBp8Lwt5abqQ1GQBmVWxEerWGUY"
               fetch(geocodeUrl)
-              .then(function (response) {
-                if (response.ok) {
-                  response.json().then(function (data) {
+                .then(function (response) {
+                  if (response.ok) {
+                    response.json().then(function (data) {
                       var currentLat = data.results[0].geometry.location.lat;
                       var currentLng = data.results[0].geometry.location.lng;
                       var latLng = { lat: currentLat, lng: currentLng }
 
-                      //set marker using latLng
+                      //create info window and append to marker
                       var contentString =
                         '<div id="content">' +
                         '<div id="siteNotice">' +
@@ -136,21 +136,19 @@ function initMap() {
                         '<div id="bodyContent">' +
                         "<p>" +
                         locationDescription +
-
                         "<br>" +
                         "<p/>" +
-                        "<br>"+
+                        "<br>" +
                         "Address: " + readableStreetNameNumberCity +
                         "<br>" +
                         "Phone Number: " + phoneNumber +
-                        
                         "</div>" +
-                        "</div>";
-
+                        "</div>"
                       var infowindow = new google.maps.InfoWindow({
                         content: contentString
                       });
 
+                      //set marker using latLng
                       var marker = new google.maps.Marker({
                         position: latLng,
                         map: map,
