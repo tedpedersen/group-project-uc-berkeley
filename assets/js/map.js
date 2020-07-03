@@ -157,6 +157,9 @@ function initMap() {
                       marker.addListener("click", function () {
                         infowindow.open(map, marker);
                       });
+                      map.addListener("click", function () {
+                        infowindow.close();
+                      });
                     })
                   } else {
                     alert("Error: " + response.statusText);
