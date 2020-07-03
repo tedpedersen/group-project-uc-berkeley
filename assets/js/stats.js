@@ -14,23 +14,22 @@ var getGlobalStats = function() {
     var yesterday = moment().subtract(1, "d")
         .hours(0)
         .minutes(0)
-        .seconds(0)
         .milliseconds(0)
         .toJSON();
-    
     // fetch data from the last two days
     var apiUrl = "https://api.covid19api.com/world?from=" + yesterday + "&to=" + today;
     console.log(apiUrl);
     fetch(apiUrl).then(function(res) {
         if(res.ok) {
             res.json().then(function(summaryData) {
-                // get yesterday's data
-                var yesterdayData = summaryData[0];
-                yesterdayData = Object.entries(yesterdayData);
 
                 // get today's data
-                var todayData = summaryData[1];
+                var todayData = summaryData[0];
                 todayData = Object.entries(todayData);
+
+                // get yesterday's data
+                var yesterdayData = summaryData[1];
+                yesterdayData = Object.entries(yesterdayData);
                 
                 // iterate through today's stats
                 for (let i=0; i < todayData.length; i++) {
