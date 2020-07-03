@@ -119,7 +119,7 @@ function initMap() {
               var streetNameAndNumber = data[i].physical_address[0].address_1.split(' ').join('+');
               var cityString = data[i].physical_address[0].city
               cityString = cityString.replace(/\s+/g, '+')
-              var geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + streetNameAndNumber + ",+" + cityString + ",+" + statesArray[i] + `&key=${googlekey}`
+              var geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + streetNameAndNumber + ",+" + cityString + ",+" + statesArray[i] + `&key=AIzaSyC5lO6ZjBp8Lwt5abqQ1GQBmVWxEerWGUY`
               fetch(geocodeUrl)
                 .then(function (response) {
                   if (response.ok) {
