@@ -52,7 +52,7 @@ p {
 /* override ui kit styles */
 /* buttons */
 .uk-button {
-    font-size: 1vw;
+    font-size: inherit;
 }
 .uk-button-default {
     padding: 5px 15px;
@@ -69,7 +69,6 @@ p {
 .uk-button-text {
     font-family: 'Nunito Sans', sans-serif;
     font-size: 1vw;
-    text-decoration: none;
     color: var(--light-text-color);
     font-weight: 400;
     opacity: .5;
@@ -140,12 +139,21 @@ ul.uk-navbar-nav li.uk-active a{
 .hero-subtitle {
     color: var(--dark-text-color);
 }
-.hero .uk-button-default{
-    width: 25%;
+.hero-buttons {
+    width: 50%;
 }
 /* hero styles end */
 
 /* stats styles start */
+.grid-stat-titles p {
+    text-align: left;
+}
+.grid-stat-values p {
+    text-align: right;
+}
+.stats {
+    margin: auto;
+}
 /* stats styles end */
 
 /* search history styles start */
@@ -278,7 +286,7 @@ html, body {
     h3 {
         font-size: 5vw;
     }
-    p {
+    p, .uk-button-text {
         font-size: 3vw;
     }
     .uk-card {
@@ -286,6 +294,10 @@ html, body {
     }
     .uk-flex {
         flex-direction: column;
+        align-items: center;
+    }
+    .hero-buttons {
+        width: 75%;
     }
     .uk-container {
         margin: 0px;
@@ -313,7 +325,13 @@ html, body {
     h3 {
         font-size: 7.5vw;
     }
-    p {
+    p, .uk-button-text {
         font-size: 5vw;
+    }
+    .hero-buttons {
+        width: 100%;
+    }
+    #homeLink{
+        display: none;
     }
 }

@@ -11,7 +11,8 @@
     <link href="assets/css/styles.css" rel="stylesheet">
 
     <!-- js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.4/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.4/dist/js/uikit-icons.min.js"></script>    
   </head>
@@ -30,40 +31,80 @@
       </nav>
     </section>
 
-    <section class="uk-cover-container hero uk-flex uk-flex-column uk-flex-center uk-padding-large" id="hero">
+    <section class="uk-cover-container hero uk-flex uk-flex-column uk-flex-middle uk-flex-center uk-padding-large" id="hero">
       <div class="hero-text uk-margin">
         <img src="assets/img/logo.svg" class="uk-animation-scale-up" width=100 />
         <h1 class="hero-title uk-animation-scale-up">COVID-19 DATAHUB</h1>
         <p class="hero-subtitle">A free resource to view daily US COVID-19 data and find testing center locations.</p>
       </div>
+
       <div class="uk-button-group uk-flex uk-flex-center hero-buttons">
         <button class="uk-button uk-button-default" onclick="scrollToStats()">Check Statistics</button>
         <a class="uk-button uk-button-default uk-margin-left" href="testing-centers.html">Find a Testing Center</a>
       </div>
+
+      <!-- used for nav so that the header in the next section appears -->
       <div id="stats"></div>
     </section>
 
     <section class="uk-container-expand uk-padding-large">
       <div id="stats-container" class="uk-flex uk-flex-column uk-flex-center">
+        <!-- stats header -->
         <div class="section-heading-container">
           <h2 class="section-title">STATISTICS</h2>
-          <h3 class="section-subtitle" id="current-date">June 27, 2020</h3>
+          <h4 id="current-date"></h4>
+          <h3 class="section-subtitle uk-margin-bottom"><span id="location">Worldwide</span> Cases</h3>
         </div>
-        <div class="stats">
-          <p>Confirmed: <span>210,151</span><span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
-          <p>Deaths: <span>10,151</span><span class="uk-margin-small-right" uk-icon="arrow-down"></span></p>
-          <p>Recovered: <span>5,151</span><span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
-          <p>Active: <span>1,510,151</span><span class="uk-margin-small-right" uk-icon="arrow-up"></span></p>
+
+        <!-- stats body -->
+        <div class="stats uk-grid uk-margin-large-bottom uk-margin-top" id="case-stats-container">
+
+          <!-- new stats -->
+          <div class="stat-bucket uk-card uk-card-default uk-card-body uk-padding" id="new-case-stats-container">
+            <h3>New Cases</h3>
+            <div id="new-case-stats-grid" class="uk-grid uk-child-width-expand">
+              <div class="grid-stat-titles">
+                <p>Confirmed:</p>
+                <p>Deaths:</p>
+                <p>Recovered:</p>
+              </div>
+              <div class="grid-stat-values uk-width-auto" id="new-case-stat-values">
+                <p id="NewConfirmed"></p>
+                <p id="NewDeaths"></p>
+                <p id="NewRecovered"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- total stats -->
+          <div class="stat-bucket uk-card uk-card-default uk-card-body uk-margin-left" id="total-case-stats-container">
+            <h3>Total Cases</h3>
+            <div id="new-case-stats-grid uk-width-auto" class="uk-grid uk-child-width-expand">
+              <div class="grid-stat-titles">
+                <p>Confirmed:</p>
+                <p>Deaths:</p>
+                <p>Recovered:</p>
+              </div>
+              <div class="grid-stat-values uk-width-auto" id="total-case-stat-values">
+                <p id="TotalConfirmed"></p>
+                <p id="TotalDeaths"></p>
+                <p id="TotalRecovered"></p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
+
+      <!-- used for nav so that the header in the next section appears -->
       <div id="stats-search"></div>
     </section>
       
     <section class="uk-container-expand uk-padding-large">
-      <div class="uk-container">
+      <div class="uk-container uk-margin-large-bottom uk-margin-top">
         <h2 class="section-title">Search for Other Statistics</h2>
         <div id="stats-container" class="uk-flex uk-flex-center uk-padding">
-          <div class="uk-card uk-card-default uk-padding">
+          <div class="uk-card uk-card-default uk-card-body">
             <h3 class="section-subtitle">By Specific State</h3>
             <p class="uk-margin">
               Input a state below to search for stats based on a specific location
@@ -73,7 +114,7 @@
               <input class="uk-search-input " type="search" placeholder="Search by state">
             </form>
           </div>
-          <div class="uk-card uk-card-default uk-margin-left uk-padding">
+          <div class="uk-card uk-card-default uk-margin-left uk-card-body">
             <h3 class="section-subtitle">By Current Location</h3>
             <p class="uk-margin">
               Click the button below to display stats based on your current location.
@@ -105,8 +146,9 @@
 
     <!-- typeahead -->
     <script src="assets/js/typeahead.js"></script>
-    <!-- our custom script -->
+    <!-- custom js -->
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/stats.js"></script>
     <!-- ui stuff -->
     <script src="assets/js/ui.js"></script>
   </body>
