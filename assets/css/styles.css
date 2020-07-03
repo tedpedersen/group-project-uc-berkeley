@@ -278,6 +278,9 @@ html, body {
     background-color: #906DE4;
 }
 
+#firstHeading {
+    font-size: 25px;
+}
 /* Tablets and Smaller */
 @media screen and (max-width: 768px) {
     h2 {

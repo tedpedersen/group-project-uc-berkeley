@@ -129,15 +129,14 @@ function initMap() {
                         '<div id="siteNotice">' +
                         "</div>" +
                         '<h1 id="firstHeading" class="firstHeading">' + locationName + '</h1>' +
-                        '<div id="bodyContent">' +
+                        '<div id="infoWindowBodyContent">' +
                         "<p>" +
                         locationDescription +
-                        "<br>" +
-                        "<p/>" +
-                        "<br>" +
+                        "<br>" + "<p/>" + "<br>" +
                         "Address: " + readableStreetNameNumberCity +
                         "<br>" +
                         "Phone Number: " + phoneNumber +
+                        "</p>"
                         "</div>" +
                         "</div>"
                       var infowindow = new google.maps.InfoWindow({
