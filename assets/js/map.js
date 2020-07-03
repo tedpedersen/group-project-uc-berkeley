@@ -100,13 +100,19 @@ function initMap() {
               //get location data for later when setting marker
               const locationName = data[i].name;
               const locationDescription = data[i].description;
+              console.log(data)
 
-              // var phoneNumber = data[i].phone[0].number;
-              // if (typeof data[i].physical_address[0].address_1 === 'string' || myVar instanceof String) {
-              //   var readableStreetNameNumberCity = data[i].physical_address[0].address_1 + ", " + data[i].physical_address[0].city;
-              // } else {
-              //   var readableStreetNameNumberCity = "Unknown"
-              // }
+              if (typeof data[i].physical_address[0].address_1 === 'string' || myVar instanceof String) {
+                var readableStreetNameNumberCity = data[i].physical_address[0].address_1 + ", " + data[i].physical_address[0].city;
+              } else {
+                var readableStreetNameNumberCity = "Unknown";
+              }
+
+              if (typeof data[i].phones[0].number === 'string' || myVar instanceof String) {
+                var phoneNumber = data[i].phones[0].number;
+              } else {
+                var phoneNumber = "Unknown";
+              }
 
               //get a latitude/longitude for each location in data array
               var streetNameAndNumber = data[i].physical_address[0].address_1.split(' ').join('+');
@@ -117,7 +123,6 @@ function initMap() {
               .then(function (response) {
                 if (response.ok) {
                   response.json().then(function (data) {
-                    console.log(data)
                       var currentLat = data.results[0].geometry.location.lat;
                       var currentLng = data.results[0].geometry.location.lng;
                       var latLng = { lat: currentLat, lng: currentLng }
@@ -132,10 +137,12 @@ function initMap() {
                         "<p>" +
                         locationDescription +
 
-                        // "<br>" +
-                        // "Address: " + readableStreetNameNumberCity +
-                        // "<br>" +
-                        // "Phone Number: " + phoneNumber +
+                        "<br>" +
+                        "<p/>" +
+                        "<br>"+
+                        "Address: " + readableStreetNameNumberCity +
+                        "<br>" +
+                        "Phone Number: " + phoneNumber +
                         
                         "</div>" +
                         "</div>";
@@ -158,7 +165,7 @@ function initMap() {
                   }
                 })
                 .catch(function (error) {
-                  alert("Unable to connect to MapQuest!")
+                  alert("Unable to connect to Google Maps!")
 
                 })
             }
