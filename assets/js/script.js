@@ -1,3 +1,5 @@
+var mapMarkers = [];
+
 // for typeahead 
 var substringMatcher = function(strs) {
     return function findMatches(q, cb) {
@@ -41,3 +43,11 @@ var substringMatcher = function(strs) {
     name: 'states',
     source: substringMatcher(states)
   });
+
+var mapMarkersDataObj = {
+  id: 1,
+  name: "Add LocalStorage Persistence",
+  type: "web",
+  status: "in progress"
+}
+console.log(mapMarkers);
