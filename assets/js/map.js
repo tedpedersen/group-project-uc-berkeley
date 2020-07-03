@@ -52,7 +52,7 @@ function initMap() {
       map.setZoom(17);  // Why 17? Because it looks good.
     }
     marker.setPosition(place.geometry.location);
-    marker.setVisible(true);
+    marker.setVisible(false);
 
     var address = '';
     if (place.address_components) {
@@ -62,11 +62,6 @@ function initMap() {
         (place.address_components[2] && place.address_components[2].short_name || '')
       ].join(' ');
     }
-
-    infowindowContent.children['place-icon'].src = place.icon;
-    infowindowContent.children['place-name'].textContent = place.name;
-    infowindowContent.children['place-address'].textContent = address;
-    infowindow.open(map, marker);
   });
 
   // Sets a listener on a radio button to change the filter type on Places
