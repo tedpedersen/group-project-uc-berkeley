@@ -24,20 +24,24 @@
       <nav class="uk-navbar-container uk-navbar uk-padding-small" uk-navbar>
         <div class="uk-navbar-left">
           <ul class="uk-navbar-nav">
-            <li id="homeLink" class="uk-active"><a href="index.html"><img src="assets/img/logo.svg" width=60/></a></li>
+            <li id="homeLink" class="uk-active"><a href="index.html"><img src="assets/img/logo.svg" width=40/></a></li>
             <li><a href="index.html#stats">Current Statistics</a></li>
             <li><a href="testing-centers.html">Find A Testing Center</a></li>
-            <li><a uk-toggle="target: #my-id" id="searchesLink">My Search History</a></li>
+            <li><a uk-toggle="target: #search-history" id="searchesLink">My Search History</a></li>
           </ul>
+        </div>
+        <div class="uk-navbar-right">
+          <ul>
         </div>
       </nav>
     </section>
 
+    <!-- hero -->
     <section class="uk-cover-container hero uk-flex uk-flex-column uk-flex-middle uk-flex-center uk-padding-large" id="hero">
       <div class="hero-text uk-margin">
         <img src="assets/img/logo.svg" class="uk-animation-scale-up" width=100 />
         <h1 class="hero-title uk-animation-scale-up">COVID-19 DATAHUB</h1>
-        <p class="hero-subtitle">A free resource to view daily US COVID-19 data and find testing center locations.</p>
+        <p class="hero-subtitle">A free resource to view COVID-19 data and find testing center locations.</p>
       </div>
 
       <div class="uk-button-group uk-flex uk-flex-center hero-buttons">
@@ -49,82 +53,62 @@
       <div id="stats"></div>
     </section>
 
+    <!-- stats section -->
     <section class="uk-container-expand uk-padding-large">
-      <div id="stats-container" class="uk-flex uk-flex-column uk-flex-center">
-        <!-- stats header -->
-        <div class="section-heading-container">
-          <h2 class="section-title">STATISTICS</h2>
-          <h4 id="current-date"></h4>
-          <h3 class="section-subtitle uk-margin-bottom"><span id="location">Worldwide</span> Cases</h3>
-        </div>
+      <div class="section-heading-container">
+        <h2 class="section-title uk-text-center"><span id="location">Worldwide</span> COVID-19 Statistics</h2>
+      </div>
 
-        <!-- stats body -->
-        <div class="stats uk-grid uk-margin-large-bottom uk-margin-top" id="case-stats-container">
-
-          <!-- new stats -->
-          <div class="stat-bucket uk-card uk-card-default uk-card-body uk-padding" id="new-case-stats-container">
-            <h3>New Cases</h3>
-            <div id="new-case-stats-grid" class="uk-grid uk-child-width-expand">
-              <div class="grid-stat-titles">
-                <p>Confirmed:</p>
-                <p>Deaths:</p>
-                <p>Recovered:</p>
-              </div>
-              <div class="grid-stat-values uk-width-auto" id="new-case-stat-values">
-                <p id="NewConfirmed"></p>
-                <p id="NewDeaths"></p>
-                <p id="NewRecovered"></p>
-              </div>
+      <div id="stats-container" class="uk-flex uk-flex-center uk-animation-scale-up" uk-grid>
+        <!-- left column -->
+        <div id="left-column" class="uk-width-1-5">
+          <!-- search -->
+          <div class="uk-card uk-card-default uk-card-body" id="stat-search">
+            <div class="uk-search uk-search-default uk-width-1-1">
+              <a href="" class="uk-search-icon-flip uk-margin-small-right" uk-search-icon id="stat-search-icon"></a>
+              <input class="uk-search-input" type="text" placeholder="Search by country" id="stat-search-input" />
             </div>
           </div>
+          
+          <!-- date last updated -->
+          <div class="uk-card uk-card-default uk-margin-top uk-card-body uk-text-meta uk-width-1-1 uk-text-center">
+            <p>Last Updated</p>
+            <p id="date-last-updated"></p>
+          </div>
+        </div>
 
-          <!-- total stats -->
-          <div class="stat-bucket uk-card uk-card-default uk-card-body uk-margin-left" id="total-case-stats-container">
-            <h3>Total Cases</h3>
-            <div id="new-case-stats-grid uk-width-auto" class="uk-grid uk-child-width-expand">
-              <div class="grid-stat-titles">
-                <p>Confirmed:</p>
-                <p>Deaths:</p>
-                <p>Recovered:</p>
+        <!-- center column -->
+        <div id="center-column" class="uk-width-1-3">
+          <!-- stats -->
+          <div class="uk-card uk-card-default uk-card-body">
+            
+            <h3 class="uk-text-center">Case Load</h3>
+            <div uk-grid>
+              <!-- data labels -->
+              <div class="grid-stat-titles uk-text-left uk-width-1-2">
+                  <p>Confirmed:</p>
+                  <p>Active:</p>
+                  <p>Deaths:</p>
+                  <p>Recovered:</p>
               </div>
-              <div class="grid-stat-values uk-width-auto" id="total-case-stat-values">
+
+              <!-- data values -->
+              <div id="confirmed-cases-container" class="uk-text-right uk-width-1-2">
                 <p id="TotalConfirmed"></p>
+                <p id="TotalActive"></p>
                 <p id="TotalDeaths"></p>
                 <p id="TotalRecovered"></p>
               </div>
             </div>
-          </div>
 
-        </div>
-      </div>
-
-      <!-- used for nav so that the header in the next section appears -->
-      <div id="stats-search"></div>
-    </section>
-      
-    <section class="uk-container-expand uk-padding-large">
-      <div class="uk-container uk-margin-large-bottom uk-margin-top">
-        <h2 class="section-title">Search for Other Statistics</h2>
-        <div id="stats-container" class="uk-flex uk-flex-center uk-padding">
-          <div class="uk-card uk-card-default uk-card-body">
-            <h3 class="section-subtitle">By Specific State</h3>
-            <p class="uk-margin">
-              Input a state below to search for stats based on a specific location
-            </p>
-            <form class="uk-search uk-search-default uk-form-large" id="stat-search-form">
-              <a href="" class="uk-search-icon-flip uk-margin-small-right" uk-search-icon id="stat-search-icon"></a>
-              <input class="uk-search-input " type="search" placeholder="Search by state" id="stat-search-input">
-            </form>
-          </div>
-          <div class="uk-card uk-card-default uk-margin-left uk-card-body">
-            <h3 class="section-subtitle">By Current Location</h3>
-            <p class="uk-margin">
-              Click the button below to display stats based on your current location.
-            </p>
-            <button class="uk-button uk-button-default">Use My Location</button>
+            <!-- button to open modal with stat definitions -->
+            <div class="uk-margin-top uk-text-center">
+              <button uk-toggle="target: #stat-definitions" type="button" class="uk-button">Definitions</button>
+            </div>
           </div>
         </div>
-      </div>
+
+        <!-- right column -->
     </section>
 
     <footer class="uk-padding">
@@ -136,8 +120,8 @@
       <p>Copyright &copy;2020</p>
     </footer>
 
-      <!-- search history modal -->
-    <div id="my-id" uk-modal>
+    <!-- search history modal -->
+    <div id="search-history" uk-modal>
         <div class="uk-modal-dialog uk-modal-body">
             <h2 class="uk-modal-title">SEARCH HISTORY</h2>
             <p>Here we will display user searches stored in local storage.</p>
@@ -146,10 +130,55 @@
         </div>
     </div>
 
-    <!-- typeahead -->
-    <script src="assets/js/typeahead.js"></script>
+    <!-- statistic definitions modal -->
+    <div id="stat-definitions" uk-modal>
+      <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+
+        <div class="uk-modal-header">
+          <h2 class="uk-modal-title">Case Load Definitions</h2>
+        </div>
+
+        <div class="uk-modal-body">
+          <ul>
+            <li><strong>Confirmed cases</strong> include presumptive positive cases.</li>
+            <li><strong>Recovered cases</strong> are estimates based on local media reports, and may be substantially lower than the true number</li>
+            <li><strong>Active cases</strong> = total confirmed - total recovered - total deaths</li>
+            <li><span uk-icon="arrow-up" style="color:red;"></span> indicates an increase in cases since the prior day</li>
+            <li><span uk-icon="arrow-down" style="color:green;"></span> indicates a decrease in cases since the prior day</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <a class="uk-button" href="#confirm-location-modal" uk-toggle>Open</a>
+
+    <!-- confirm location modal -->
+    <div id="confirm-location-modal" class="uk-modal-container" uk-modal>
+      <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+          <h2 class="uk-modal-title uk-text-center">Confirm Location</h2>
+        </div>
+
+          <form id="confirm-location-form">
+            <div class="uk-modal-body">
+              <p id="confirm-location-form-message">
+                  Your search term matched multiple locations. Please select a location from the list below to continue.
+              </p>
+              <div id="confirm-location-form-body" class="uk-margin uk-margin-left uk-margin-right uk-margin-top" uk-overflow-auto></div>
+            </div>
+            <div class="uk-modal-footer uk-text-right" id="confirm-location-form-buttons">
+                <button class="uk-button uk-margin-left" type="submit" id="confirm-location-save">Confirm</button>
+            </div>
+          </form>
+          
+      </div>
+  </div>
+
     <!-- custom js -->
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/config.js"></script>
     <script src="assets/js/stats.js"></script>
     <!-- ui stuff -->
     <script src="assets/js/ui.js"></script>
