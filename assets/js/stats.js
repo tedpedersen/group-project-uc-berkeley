@@ -53,7 +53,7 @@ var surfaceCaseByCountryData = function() {
      */
     for (let i=0; i < globalStats.Countries.length; i++) {
         var countryStats = globalStats.Countries[i];
-        var countryStatElement = $("<tr>").addClass("case-by-country-row");
+        var countryStatElement = $("<tr>").addClass(["case-by-country-row", "uk-text-nowrap"]).attr("id", countryStats.CountryCode + "-" + "case-load");
 
         // calculate active case stats
         countryStats.TotalActive = countryStats.TotalConfirmed - countryStats.TotalDeaths - countryStats.TotalRecovered;
@@ -103,11 +103,11 @@ var surfaceCaseByCountryData = function() {
             var newStatName = statName.replace("Total", "New");
             if (newStatName in countryStats) {
                 if (countryStats[newStatName] > 0) {
-                    $("#" + arrowElementId).attr("uk-icon", "icon: arrow-up;")
-                    $("#" + valueElementId).addClass(["uk-margin-left-small", "uk-text-danger"]);
+                    $("#" + arrowElementId).attr("uk-icon", "icon: arrow-up;");
+                    $("#" + valueElementId).addClass(["uk-text-danger", "uk-margin-right"]);
                 } else {
                     $("#" + arrowElementId).attr("uk-icon", "icon: arrow-down;");
-                    $("#" + valueElementId).addClass(["uk-margin-left-small", "uk-text-success"]);
+                    $("#" + valueElementId).addClass(["uk-text-success", "uk-margin-right"]);
                 }
             }
         }

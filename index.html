@@ -64,7 +64,7 @@
           <!-- left column -->
           <div id="left-column" class="uk-width-1-5">
             <!-- search -->
-            <div class="uk-card uk-card-default uk-card-body " id="stat-search">
+            <div class="uk-card uk-card-default uk-card-body" id="stat-search">
               <div class="uk-search uk-search-default uk-width-1-1">
                 <a href="" class="uk-search-icon-flip uk-margin-small-right" uk-search-icon id="stat-search-icon"></a>
                 <input class="uk-search-input" type="text" placeholder="Search by country" id="stat-search-input" />
@@ -106,20 +106,20 @@
                 <h3>Case Count by Country</h3>
               </div>
 
-              <div class="uk-panel uk-panel-scrollable" style="resize:none; height: 400px;">
+              <!-- <div class="uk-panel uk-panel-scrollable" style="resize:none; height: 400px;"></div> -->
                 <table id="country-case-table" class="uk-table uk-table-middle uk-table-responsive uk-table-divider uk-table-small">
                   <thead>
-                      <tr>
-                        <th class="uk-width-1-5 uk-text-left">Country</th>
-                        <th class="uk-width-1-5 uk-text-center">Active</th>
-                        <th class="uk-width-1-5 uk-text-center">Recoveries</th>
-                        <th class="uk-width-1-5 uk-text-center">Deaths</th>
-                        <th class="uk-width-1-5 uk-text-center">Confirmed</th>
+                      <tr class="uk-panel uk-margin-small-left uk-margin-small-right">
+                        <th class="uk-text-left uk-width-expand">Country</th>
+                        <th class="uk-text-center uk-width-expand">Active</th>
+                        <th class="uk-text-center uk-width-expand">Recoveries</th>
+                        <th class="uk-text-center uk-width-expand">Deaths</th>
+                        <th class="uk-text-center uk-width-expand">Confirmed</th>
                       </tr>
                   </thead>
-                  <tbody id="case-by-country-data"></tbody>
+                  <tbody id="case-by-country-data" class="uk-panel uk-panel-scrollable uk-padding-none" style="resize:none; height: 400px;"></tbody>
                 </table>
-              </div>
+              <!-- </div> -->
             </div>
         </div>
     </section>
