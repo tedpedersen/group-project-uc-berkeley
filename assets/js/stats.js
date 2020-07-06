@@ -8,6 +8,8 @@ var surfaceHighlightedData = function() {
      *     2. Uses the derivative data to determine the arrow direction and font color
      */
     
+    $("#highlighted-stat-value").removeClass(["uk-text-danger", "uk-text-success"]);
+    
     var selectedStatType = $("#case-type-menu > li.uk-active > a").attr("id");
 
     // calculate active stats if active is selected
@@ -49,62 +51,64 @@ var surfaceCaseByCountryData = function() {
     /**
      * Placeholder function that surfaces case by country data. Eventually should consolidate this into the surfaceHighlightedData function since there's so much repetition
      */
-    var selectedStatType = $("#case-type-menu > li.uk-active > a").attr("id");
-    var statName = "Total" + selectedStatType;
     for (let i=0; i < globalStats.Countries.length; i++) {
         var countryStats = globalStats.Countries[i];
-        var countryStatElement = $("<tr>");
+        var countryStatElement = $("<tr>").addClass("case-by-country-row");
+
+        // calculate active case stats
+        countryStats.TotalActive = countryStats.TotalConfirmed - countryStats.TotalDeaths - countryStats.TotalRecovered;
+        countryStats.NewActive = countryStats.NewConfirmed - countryStats.NewDeaths - countryStats.NewRecovered;
 
         // save the country name
         countryStatElement.append(
             $("<td>").text(countryStats.Country).attr("id", countryStats.CountryCode + "-label").addClass("uk-text-left")
         );
 
-        // calculate active stats if active is selected
-        if (selectedStatType == "Active") {
-            countryStats.TotalActive = countryStats.TotalConfirmed - countryStats.TotalDeaths - countryStats.TotalRecovered;
-            countryStats.NewActive = countryStats.NewConfirmed - countryStats.NewDeaths - countryStats.NewRecovered;
-        }
+        var statNames = ["Active", "Recovered", "Deaths", "Confirmed"]
+        for (let i=0; i < statNames.length; i++) {
+            var statName = "Total" + statNames[i];
+        
+            // find and update the stat value
+            var statValue = countryStats[statName].toLocaleString();
+            if (statValue === 0) {
+                statValue = "-";
+            }
     
-        // find and update the stat value
-        var statValue = countryStats[statName].toLocaleString();
-        if (statValue === 0) {
-            statValue = "-";
-        }
-        console.log(countryStats.Country, statValue);
-
-        // add it to the page if necessary
-        let valueElement = $("#" + countryStats.CountryCode + "-value");
-        if (valueElement.length === 0) {
-            $("#stats-by-country-data").append(countryStatElement.append(
-                $("<td>")
-                    .text(statValue)
-                    .addClass("uk-text-right")
-                    .attr("id", countryStats.CountryCode + "-value")
-                    .append(
-                        $("<span>").attr("id", countryStats.CountryCode + "-arrow")
+            // add it to the page if necessary
+            var valueElementId = countryStats.CountryCode + "-" + statNames[i].toLowerCase() + "-value";
+            var arrowElementId = countryStats.CountryCode + "-" + statNames[i].toLowerCase() + "-arrow";
+            let valueElement = $("#" + valueElementId);
+            if (valueElement.length === 0) {
+                $("#case-by-country-data").append(countryStatElement.append(
+                    $("<td>")
+                        .text(statValue)
+                        .addClass("uk-text-right")
+                        .attr("id", valueElementId)
+                        .append(
+                            $("<span>").attr("id", arrowElementId)
+                        )
                     )
-                )
-            );
-        } else {
-            $("#" + countryStats.CountryCode + "-value")
-                .text(statValue)
-                .removeClass(["uk-text-danger", "uk-text-success"])
-                .removeAttr("uk-icon")
-                .append(
-                    $("<span>").attr("id", countryStats.CountryCode + "-arrow")
                 );
-        }
-
-        // create an arrow to denote the change in case load
-        var newStatName = statName.replace("Total", "New");
-        if (newStatName in countryStats) {
-            if (countryStats[newStatName] > 0) {
-                $("#" + countryStats.CountryCode + "-arrow").attr("uk-icon", "icon: arrow-up;")
-                $("#" + countryStats.CountryCode + "-value").addClass(["uk-margin-left-small", "uk-text-danger"]);
             } else {
-                $("#" + countryStats.CountryCode + "-arrow").attr("uk-icon", "icon: arrow-down;");
-                $("#" + countryStats.CountryCode + "-value").addClass(["uk-margin-left-small", "uk-text-success"]);
+                $("#" + valueElementId)
+                    .text(statValue)
+                    .removeClass(["uk-text-danger", "uk-text-success"])
+                    .removeAttr("uk-icon")
+                    .append(
+                        $("<span>").attr("id", arrowElementId)
+                    );
+            }
+    
+            // create an arrow to denote the change in case load
+            var newStatName = statName.replace("Total", "New");
+            if (newStatName in countryStats) {
+                if (countryStats[newStatName] > 0) {
+                    $("#" + arrowElementId).attr("uk-icon", "icon: arrow-up;")
+                    $("#" + valueElementId).addClass(["uk-margin-left-small", "uk-text-danger"]);
+                } else {
+                    $("#" + arrowElementId).attr("uk-icon", "icon: arrow-down;");
+                    $("#" + valueElementId).addClass(["uk-margin-left-small", "uk-text-success"]);
+                }
             }
         }
     }
@@ -135,7 +139,7 @@ var confirmLocation = function(locationsArray) {
         
         $("#confirm-location-form-body")
             .append($("<div>")
-                .addClass("search-result-item", "uk-form-controls", "uk-padding-bottom")
+                .addClass(["search-result-item", "uk-form-controls", "uk-padding-bottom"])
                 .append([searchResultInput, searchResultLabel])
             );
     }
@@ -144,8 +148,6 @@ var confirmLocation = function(locationsArray) {
     UIkit.modal("#confirm-location-modal").show();
 }
 
-
-// API CALLS
 var getCaseLoadData = function() {
     /**
      * Gets global stats from the covid19 API. Docs: https://documenter.getpostman.com/view/10808728/SzS8rjbc?version=latest
@@ -165,6 +167,8 @@ var getCaseLoadData = function() {
                 dateLastUpdated = moment(dateLastUpdated).format("MMMM Do, YYYY [at] h:mm A");
                 $("#date-last-updated").text(dateLastUpdated);
             })
+        } else {
+            console.log(res.text);
         }
     })
 }
@@ -174,7 +178,7 @@ var surfaceNoLocationFound = function(searchTerm) {
      * Helper function that tells the user that their search yielded no results
      */
     searchTerm = searchTerm.split("+").join(" ");
-    var message = `Could not find the location "${searchTerm}"!`
+    var message = `Could not find a location named "${searchTerm}"`
     var messageElement = $("<p>").text(message).addClass("uk-text-meta").attr("id", "stat-search-message");
     $("#stat-search").append(messageElement);
 }
@@ -184,7 +188,7 @@ var getSpecificLocation = function(searchTerm) {
      * Uses the Google Maps geocoding API to find a location based on the search term
      */ 
     searchTerm = searchTerm.split(" ").join("+");
-    var geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + searchTerm + "&key=" + `${googlekey}`;
+    var geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + searchTerm + "&key=AIzaSyC5lO6ZjBp8Lwt5abqQ1GQBmVWxEerWGUY";
     fetch(geocodeUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
@@ -196,9 +200,6 @@ var getSpecificLocation = function(searchTerm) {
                 } else {  // if there are multiple results, make the user choose one, then surface the stats on submit
                     confirmLocation(data.results);
                 }
-
-                // surface the data
-                surfaceCaseLoadData(mostRecentCaseLoad);
             })
         } else {
             surfaceNoLocationFound(searchTerm);
@@ -213,6 +214,8 @@ var surfaceSpecificLocation = function(addressComponents) {
     var countryName;
     var countryCode;
 
+    console.log(addressComponents);
+
     // iterate through the address components to get the country
     for (let i=0; i < addressComponents.length; i++) {
         if (addressComponents[i].types.includes("country")) {
@@ -222,7 +225,6 @@ var surfaceSpecificLocation = function(addressComponents) {
     }
 
     // update the stats
-    var statsByCountry = globalStats.Countries;
     for (let i=0; i < globalStats.Countries.length; i++) {
         if (globalStats.Countries[i].CountryCode === countryCode) {
             statsToHighlight = globalStats.Countries[i];
@@ -294,6 +296,9 @@ $("#confirm-location-form").submit(function(event) {
 })
 
 $("#case-type-menu").click(function() {
+    /**
+     * Surfaces Confirmed, Active, Recovered, and Deaths based on the menu selection
+     */
     surfaceHighlightedData();
     surfaceCaseByCountryData();
 });
