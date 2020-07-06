@@ -1,37 +1,111 @@
-var googlekey = config.googlekey;
-var globalSummaryStats;
+var globalStats;
+var statsToHighlight;
 
-var surfaceCaseLoadData = function(mostRecentCaseLoad) {
+var surfaceHighlightedData = function() {
     /**
-     * Surfaces the caseload counts:
+     * Surfaces the caseload counts for the highlighted data variable:
      *     1. Displays the total counts
      *     2. Uses the derivative data to determine the arrow direction and font color
-     */ 
-    var statNames = ["TotalActive", "TotalConfirmed", "TotalDeaths", "TotalRecovered"];
-    for (let i = 0; i < statNames.length; i++){
-        var statName = statNames[i];
-        var statValue = mostRecentCaseLoad[statName].toLocaleString();
+     */
+    
+    var selectedStatType = $("#case-type-menu > li.uk-active > a").attr("id");
+
+    // calculate active stats if active is selected
+    if (selectedStatType == "Active") {
+        statsToHighlight.TotalActive = statsToHighlight.TotalConfirmed - statsToHighlight.TotalDeaths - statsToHighlight.TotalRecovered;
+        statsToHighlight.NewActive = statsToHighlight.NewConfirmed - statsToHighlight.NewDeaths - statsToHighlight.NewRecovered;
+    }
+
+    var statName = "Total" + selectedStatType;
+    
+    // find and update the stat value
+    var statValue = statsToHighlight[statName].toLocaleString();
+    if (statValue === 0) {
+        statValue = "-";
+    }
+
+    // add an arrow to denote the change in case load
+    var newStatName = statName.replace("Total", "New");
+    if (newStatName in statsToHighlight) {
+
+        // create the arrow
+        var trendArrow = $("<span>").addClass("uk-margin-left-small");
+        if (statsToHighlight[newStatName] > 0) {
+            trendArrow.attr("uk-icon", "icon: arrow-up;");
+            $("#highlighted-stat-value").addClass("uk-text-danger");
+        } else {
+            trendArrow.attr("uk-icon", "icon: arrow-down;");
+            $("#highlighted-stat-value").addClass("uk-text-success");
+        }
+
+        // add the arrow and stat label
+        $("#highlighted-stat-value").text(statValue).append(trendArrow);
+        var displayStatName = statName.replace("Total", "Total ");
+        $("#highlighted-stat-label").text(displayStatName);
+    }
+}
+
+var surfaceCaseByCountryData = function() {
+    /**
+     * Placeholder function that surfaces case by country data. Eventually should consolidate this into the surfaceHighlightedData function since there's so much repetition
+     */
+    var selectedStatType = $("#case-type-menu > li.uk-active > a").attr("id");
+    var statName = "Total" + selectedStatType;
+    for (let i=0; i < globalStats.Countries.length; i++) {
+        var countryStats = globalStats.Countries[i];
+        var countryStatElement = $("<tr>");
+
+        // save the country name
+        countryStatElement.append(
+            $("<td>").text(countryStats.Country).attr("id", countryStats.CountryCode + "-label").addClass("uk-text-left")
+        );
+
+        // calculate active stats if active is selected
+        if (selectedStatType == "Active") {
+            countryStats.TotalActive = countryStats.TotalConfirmed - countryStats.TotalDeaths - countryStats.TotalRecovered;
+            countryStats.NewActive = countryStats.NewConfirmed - countryStats.NewDeaths - countryStats.NewRecovered;
+        }
+    
+        // find and update the stat value
+        var statValue = countryStats[statName].toLocaleString();
         if (statValue === 0) {
             statValue = "-";
         }
-        $("#" + statName).text(statValue).css("color", "inherit");
+        console.log(countryStats.Country, statValue);
 
-        // add an arrow to denote the change in case load
+        // add it to the page if necessary
+        let valueElement = $("#" + countryStats.CountryCode + "-value");
+        if (valueElement.length === 0) {
+            $("#stats-by-country-data").append(countryStatElement.append(
+                $("<td>")
+                    .text(statValue)
+                    .addClass("uk-text-right")
+                    .attr("id", countryStats.CountryCode + "-value")
+                    .append(
+                        $("<span>").attr("id", countryStats.CountryCode + "-arrow")
+                    )
+                )
+            );
+        } else {
+            $("#" + countryStats.CountryCode + "-value")
+                .text(statValue)
+                .removeClass(["uk-text-danger", "uk-text-success"])
+                .removeAttr("uk-icon")
+                .append(
+                    $("<span>").attr("id", countryStats.CountryCode + "-arrow")
+                );
+        }
+
+        // create an arrow to denote the change in case load
         var newStatName = statName.replace("Total", "New");
-        if (newStatName in mostRecentCaseLoad) {
-
-            // create the arrow
-            var trendArrow = $("<span>").addClass("uk-margin-left-small");
-            if (mostRecentCaseLoad[newStatName] > 0) {
-                trendArrow.attr("uk-icon", "icon: arrow-up;");
-                $("#" + statName).css("color", "red");
+        if (newStatName in countryStats) {
+            if (countryStats[newStatName] > 0) {
+                $("#" + countryStats.CountryCode + "-arrow").attr("uk-icon", "icon: arrow-up;")
+                $("#" + countryStats.CountryCode + "-value").addClass(["uk-margin-left-small", "uk-text-danger"]);
             } else {
-                trendArrow.attr("uk-icon", "icon: arrow-down;");
-                $("#" + statName).css("color", "green");
+                $("#" + countryStats.CountryCode + "-arrow").attr("uk-icon", "icon: arrow-down;");
+                $("#" + countryStats.CountryCode + "-value").addClass(["uk-margin-left-small", "uk-text-success"]);
             }
-
-            // add the arrow
-            $("#" + statName).append(trendArrow);
         }
     }
 }
@@ -72,91 +146,25 @@ var confirmLocation = function(locationsArray) {
 
 
 // API CALLS
-var getGlobalData = function() {
+var getCaseLoadData = function() {
     /**
      * Gets global stats from the covid19 API. Docs: https://documenter.getpostman.com/view/10808728/SzS8rjbc?version=latest
      **/
-
-    // first get the summary stats for the world 
     var summaryApiUrl = "https://api.covid19api.com/summary";
     fetch(summaryApiUrl).then(function(res) {
         if(res.ok){
             res.json().then(function(data){
-                globalSummaryStats = data;
+                // store all response data in a variable and surface the relevant data
+                globalStats = data;
+                statsToHighlight = data.Global;
+                surfaceHighlightedData();
+                surfaceCaseByCountryData();
+
+                // update the last updated date
+                var dateLastUpdated = data.Countries[0].Date;
+                dateLastUpdated = moment(dateLastUpdated).format("MMMM Do, YYYY [at] h:mm A");
+                $("#date-last-updated").text(dateLastUpdated);
             })
-        }
-    })
-
-    // then get the world data 
-    var worldApiUrl = "https://api.covid19api.com/world?from=" + yesterday + "&to=" + today;
-    fetch(worldApiUrl).then(function(res) {
-        if(res.ok) {
-            res.json().then(function(summaryData) {
-                var mostRecentCaseLoad = summaryData[(summaryData.length - 1)];
-
-                // record total active case stats
-                var totalConfirmed = mostRecentCaseLoad.TotalConfirmed;
-                var totalDeaths = mostRecentCaseLoad.TotalDeaths
-                var totalRecovered = mostRecentCaseLoad.TotalRecovered;
-                mostRecentCaseLoad.TotalActive = totalConfirmed - totalDeaths - totalRecovered;
-
-                // record new active case stats
-                var newConfirmed = mostRecentCaseLoad.NewConfirmed;
-                var newDeaths = mostRecentCaseLoad.NewDeaths
-                var newRecovered = mostRecentCaseLoad.TotalRecovered;
-                mostRecentCaseLoad.NewActive = newConfirmed - newDeaths - newRecovered;
-
-                // surface the stats
-                surfaceCaseLoadData(mostRecentCaseLoad);
-            })
-        } else {
-            surfaceData(globalSummaryStats);
-        }
-    }).then (function() {
-        
-    })
-}
-
-var getLocalData = function(country) {
-    /**
-     * Gets local stats from the covid19 API. Docs: https://documenter.getpostman.com/view/10808728/SzS8rjbc?version=latest
-     **/
-    var threeDaysAgo = moment().subtract(2,"d").hour(0).minute(0).second(0).format();
-
-    var apiUrl = "https://api.covid19api.com/total/country/" + country + "?from=" + threeDaysAgo + "&to=" + today;
-    fetch(apiUrl).then(function(res) {
-        if(res.ok) {
-            res.json().then(function(summaryData) {
-                var mostRecentCaseLoad = summaryData[(summaryData.length - 1)];
-
-                // aggregate totals
-                var confirmedCount = mostRecentCaseLoad.Confirmed;
-                var deathCount = mostRecentCaseLoad.Deaths;
-                var recoveredCount = mostRecentCaseLoad.Recovered;
-
-                mostRecentCaseLoad["TotalConfirmed"] = confirmedCount;
-                mostRecentCaseLoad["TotalRecovered"] = recoveredCount;
-                mostRecentCaseLoad["TotalDeaths"] = deathCount;
-                mostRecentCaseLoad["TotalActive"] = confirmedCount - deathCount - recoveredCount; 
-
-                // aggregate derivative data if possible
-                if (summaryData.length > 1) {
-                    var dayPriorCaseLoad = summaryData[(summaryData.length - 2)];
-                    var confirmedCount = dayPriorCaseLoad.Confirmed;
-                    var deathCount = dayPriorCaseLoad.Deaths;
-                    var recoveredCount = dayPriorCaseLoad.Recovered;
-    
-                    mostRecentCaseLoad["NewConfirmed"] = confirmedCount;
-                    mostRecentCaseLoad["NewRecovered"] = recoveredCount;
-                    mostRecentCaseLoad["NewDeaths"] = deathCount;
-                    mostRecentCaseLoad["NewActive"] = confirmedCount - deathCount - recoveredCount;
-                }
-
-                // surface the data
-                surfaceCaseLoadData(mostRecentCaseLoad);
-            })
-        } else {
-            console.log(res.text);
         }
     })
 }
@@ -188,6 +196,9 @@ var getSpecificLocation = function(searchTerm) {
                 } else {  // if there are multiple results, make the user choose one, then surface the stats on submit
                     confirmLocation(data.results);
                 }
+
+                // surface the data
+                surfaceCaseLoadData(mostRecentCaseLoad);
             })
         } else {
             surfaceNoLocationFound(searchTerm);
@@ -211,8 +222,14 @@ var surfaceSpecificLocation = function(addressComponents) {
     }
 
     // update the stats
-    getLocalData(countryCode);
-    $("#location").text(countryName);
+    var statsByCountry = globalStats.Countries;
+    for (let i=0; i < globalStats.Countries.length; i++) {
+        if (globalStats.Countries[i].CountryCode === countryCode) {
+            statsToHighlight = globalStats.Countries[i];
+            surfaceHighlightedData();
+            $("#location").text(countryName);
+        }
+    }
 }
 
 
@@ -245,7 +262,7 @@ $("#stat-search-input").keypress(function() {
 
 $("#stat-search-icon").click(function(event){
     /**
-     * Event listener for the searchf input's icon click
+     * Event listener for the search input's icon click
      */
     event.preventDefault();
     var searchTerm = $("#stat-search-input").val();
@@ -276,9 +293,10 @@ $("#confirm-location-form").submit(function(event) {
     }
 })
 
+$("#case-type-menu").click(function() {
+    surfaceHighlightedData();
+    surfaceCaseByCountryData();
+});
+
 // ON LOAD
-var today = moment().utc().hour(0).minute(0).second(0).format();  // used in API calls
-var yesterday = moment().subtract(1,"d").utc().hour(0).minute(0).second(0).format();  // used in API calls
-var displayYesterday = moment().subtract(1,"d").format("MMMM Do, YYYY");
-$("#date-last-updated").text(displayYesterday);
-getGlobalData();
+getCaseLoadData();
