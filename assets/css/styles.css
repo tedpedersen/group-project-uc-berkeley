@@ -279,6 +279,11 @@ html, body {
 #firstHeading {
     font-size: 25px;
 }
+
+#infoWindowBodyContent .infoWindowParagraph {
+    font-size: 15px;
+}
+
 /* Tablets and Smaller */
 @media screen and (max-width: 768px) {
     h2 {

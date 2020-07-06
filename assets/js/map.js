@@ -126,18 +126,20 @@ function initMap() {
                         //create info window and append to marker
                         var contentString =
                           '<div id="content">' +
-                          '<div id="siteNotice">' +
-                          "</div>" +
-                          '<h1 id="firstHeading" class="firstHeading">' + locationName + '</h1>' +
-                          '<div id="infoWindowBodyContent">' +
-                          "<p>" +
-                          locationDescription +
-                          "<br>" + "<p/>" + "<br>" +
-                          "Address: " + readableStreetNameNumberCity +
-                          "<br>" +
-                          "Phone Number: " + phoneNumber +
-                          "</p>"
-                        "</div>" +
+                            '<div id="siteNotice">' +
+                            "</div>" +
+                            '<h1 id="firstHeading" class="firstHeading">' + locationName + '</h1>' +
+                            '<div id="infoWindowBodyContent">' +
+                              '<p class="infoWindowParagraph">' +
+                                locationDescription +
+                                "<br>" + 
+                              "<p/>" +
+                              '<p class="infoWindowParagraph">' +
+                                "Address: " + readableStreetNameNumberCity +
+                                "<br>" +
+                                "Phone Number: " + phoneNumber +
+                              "</p>" +
+                            "</div>" +
                           "</div>"
                         var infowindow = new google.maps.InfoWindow({
                           content: contentString
