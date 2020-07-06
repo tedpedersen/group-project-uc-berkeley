@@ -277,11 +277,15 @@ html, body {
 }
 
 #firstHeading {
-    font-size: 25px;
+    font-size: 20px;
 }
 
 #infoWindowBodyContent .infoWindowParagraph {
     font-size: 15px;
+}
+
+#infoWindowContent {
+    max-width: 324px;
 }
 
 /* Tablets and Smaller */

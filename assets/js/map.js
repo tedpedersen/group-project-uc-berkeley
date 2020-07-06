@@ -93,20 +93,20 @@ function initMap() {
             //loop over each state's data array
             for (var i = 0; i < data.length; i++) {
 
-              //get location data for later (when setting marker)
+              //get location's data for info windows
               const locationName = data[i].name;
               const locationDescription = data[i].description;
-
-              if (typeof data[i].physical_address[0].address_1 === 'string' || myVar instanceof String) {
-                var readableStreetNameNumberCity = data[i].physical_address[0].address_1 + ", " + data[i].physical_address[0].city;
+              console.log(i)
+              if (data[i].physical_address[0].address_1 === 'null' || data[i].physical_address[0].address_1 === undefined) {
+                var phoneNumber = "Unknown";
               } else {
-                var readableStreetNameNumberCity = "Unknown";
+                var readableStreetNameNumberCity = data[i].physical_address[0].address_1 + ", " + data[i].physical_address[0].city;
               }
 
-              if (typeof data[i].phones[0].number === 'string' || myVar instanceof String) {
-                var phoneNumber = data[i].phones[0].number;
-              } else {
+              if (data[i].phones[0].number === 'null' || data[i].phones[0].number === undefined) {
                 var phoneNumber = "Unknown";
+              } else {
+                var phoneNumber = data[i].phones[0].number;
               }
 
               //get a latitude/longitude for each location in data array
@@ -125,7 +125,7 @@ function initMap() {
 
                         //create info window and append to marker
                         var contentString =
-                          '<div id="content">' +
+                          '<div id="infoWindowContent">' +
                             '<div id="siteNotice">' +
                             "</div>" +
                             '<h1 id="firstHeading" class="firstHeading">' + locationName + '</h1>' +
@@ -149,7 +149,8 @@ function initMap() {
                         var marker = new google.maps.Marker({
                           position: latLng,
                           map: map,
-                          title: locationName
+                          title: locationName,
+                          animation: google.maps.Animation.DROP
                         });
                         marker.addListener("click", function () {
                           infowindow.open(map, marker);
