@@ -97,13 +97,14 @@ function initMap() {
               const locationName = data[i].name;
               const locationDescription = data[i].description;
               console.log(i)
-              if (data[i].physical_address[0].address_1 === 'null' || data[i].physical_address[0].address_1 === undefined) {
+              if (data[i].physical_address[0].address_1 === undefined) {
+              console.log("skip")
                 var phoneNumber = "Unknown";
               } else {
                 var readableStreetNameNumberCity = data[i].physical_address[0].address_1 + ", " + data[i].physical_address[0].city;
               }
 
-              if (data[i].phones[0].number === 'null' || data[i].phones[0].number === undefined) {
+              if (data[i].phones[0].number === undefined) {
                 var phoneNumber = "Unknown";
               } else {
                 var phoneNumber = data[i].phones[0].number;
