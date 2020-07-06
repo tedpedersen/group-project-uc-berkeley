@@ -106,13 +106,13 @@ function initMap() {
       address = [
         (place.address_components[0] &&
           place.address_components[0].short_name) ||
-          "",
+        "",
         (place.address_components[1] &&
           place.address_components[1].short_name) ||
-          "",
+        "",
         (place.address_components[2] &&
           place.address_components[2].short_name) ||
-          "",
+        "",
       ].join(" ");
     }
   });
@@ -142,8 +142,8 @@ function initMap() {
   for (var i = 0; i < statesArray.length; i++) {
     fetch(
       "https://covid-19-testing.github.io/locations/" +
-        statesArray[i] +
-        "/complete.json"
+      statesArray[i] +
+      "/complete.json"
     )
       .then(function (response) {
         if (response.ok) {
@@ -153,9 +153,7 @@ function initMap() {
               //get location's data for info windows
               const locationName = data[i].name;
               const locationDescription = data[i].description;
-              console.log(i);
               if (data[i].physical_address === undefined) {
-                console.log("skip");
                 var phoneNumber = "Unknown";
               } else {
                 if (data[i].physical_address[0] !== undefined) {
