@@ -16,10 +16,10 @@
 * {
     margin: 0px;
     padding: 0px;
+    font-family: 'Nunito Sans', sans-serif!important;
 }
-body, h1, h2, h3, p, a {
-    font-family: 'Nunito Sans', sans-serif;
-    text-align: center;
+main {
+    margin: auto;
 }
 a {
     text-decoration: none;
@@ -29,12 +29,15 @@ h1{
     font-weight: 700;
     text-shadow: 2px 2px 2px #fff;
     font-size: 4em;
+    text-align: center;
 }
 h2 {
     font-size: 3em;
+    text-align: center;
 }
 h3 {
     font-size: 2em;
+    text-align: center;
 }
 p {
     font-weight: 400;
@@ -53,13 +56,13 @@ p {
 /* buttons */
 .uk-button {
     font-size: inherit;
+    border-radius: 4px;
 }
 .uk-button-default {
     padding: 5px 15px;
     background-color: var(--light-purple);
     color: var(--light-text-color);
     border: none;
-    border-radius: 4px;
     width: 80%;
 }
 .uk-button-default:hover {
@@ -67,7 +70,6 @@ p {
     color: var(--light-text-color);
 }
 .uk-button-text {
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 1vw;
     color: var(--light-text-color);
     font-weight: 400;
@@ -109,7 +111,6 @@ p {
     background-color: var(--dark-purple);
 }
 .uk-navbar-container:not(.uk-navbar-transparent) ul li a{
-    font-family: 'Nunito Sans', sans-serif;
     color: var(--light-text-color);
     font-weight: 400;
     opacity: .7;
@@ -225,12 +226,10 @@ html, body {
 .pac-controls label {
     font-size: 13px;
     font-weight: 400;
-    font-family: 'Nunito Sans', sans-serif;
 }
 
 #pac-input {
     background-color: #fff;
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 15px;
     font-weight: 400;
     margin-left: 12px;
@@ -246,7 +245,6 @@ html, body {
 
 #title {
     color: #fff;
-    font-family: 'Nunito Sans', sans-serif;
     background-color: #906DE4;
     font-size: 25px;
     font-weight: 700;

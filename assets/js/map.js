@@ -1,4 +1,3 @@
-var googlekey = config.googlekey;
 //no data available for South Dakota or Rhode Island
 var statesArray = ['alabama', 'alaska', 'arizona', 'arkansas', 'california', 'colorado', 'connecticut', 'delaware', 'florida', 'georgia', 'hawaii', 'idaho', 'illinois', 'indiana', 'iowa', 'kansas', 'kentucky', 'louisiana', 'maine', 'maryland', 'massachusetts', 'michigan', 'minnesota', 'mississippi', 'missouri', 'montana', 'nebraska', 'nevada', 'new-hampshire', 'new-jersey', 'new-mexico', 'new-york', 'north-carolina', 'north-dakota', 'ohio', 'oklahoma', 'oregon', 'pennsylvania', 'south-carolina', 'tennessee', 'texas', 'utah', 'vermont', 'virginia', 'washington', 'west-virginia', 'wisconsin', 'wyoming']
 
@@ -114,7 +113,7 @@ function initMap() {
               var streetNameAndNumber = data[i].physical_address[0].address_1.split(' ').join('+');
               var cityString = data[i].physical_address[0].city
               cityString = cityString.replace(/\s+/g, '+')
-              var geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + streetNameAndNumber + ",+" + cityString + ",+" + statesArray[i] + `&key=${googlekey}`
+              var geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + streetNameAndNumber + ",+" + cityString + ",+" + statesArray[i] + `&key=AIzaSyC5lO6ZjBp8Lwt5abqQ1GQBmVWxEerWGUY`
               fetch(geocodeUrl)
                 .then(function (response) {
                   if (response.ok) {
