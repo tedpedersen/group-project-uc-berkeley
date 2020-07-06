@@ -53,10 +53,13 @@ p {
 /* font formatting end */
 
 /* override ui kit styles */
+.uk-badge {
+    padding: 10px;
+    margin: 0px;
+}
 /* buttons */
 .uk-button {
     font-size: inherit;
-    border-radius: 4px;
 }
 .uk-button-default {
     padding: 5px 15px;
@@ -122,6 +125,13 @@ p {
 ul.uk-navbar-nav li.uk-active a{
     font-weight: 700;
     opacity: 1;
+}
+.uk-panel {
+    border: none;
+}
+.uk-panel-scrollable {
+    height: 880px;
+    resize: none;
 }
 /* override ui kit styles end */
 

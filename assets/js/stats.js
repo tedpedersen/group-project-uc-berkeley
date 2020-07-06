@@ -44,6 +44,13 @@ var surfaceHighlightedData = function() {
         $("#highlighted-stat-value").text(statValue).append(trendArrow);
         var displayStatName = statName.replace("Total", "Total ");
         $("#highlighted-stat-label").text(displayStatName);
+
+        // add the badge for location
+        if (statsToHighlight.Country) {
+            $("#highlighted-stat-location").text(statsToHighlight.Country);
+        } else {
+            $("#highlighted-stat-location").text("Worldwide");
+        }
     }
 }
 

@@ -24,7 +24,7 @@
         <div class="uk-navbar-left">
           <ul class="uk-navbar-nav">
             <li id="homeLink" class="uk-active"><a href="index.html"><img src="assets/img/logo.svg" width=40/></a></li>
-            <li><a href="index.html#stats">Current Statistics</a></li>
+            <li><a href="index.html#stats" uk-scroll>Current Statistics</a></li>
             <li><a href="testing-centers.html">Find A Testing Center</a></li>
             <li><a uk-toggle="target: #search-history" id="searchesLink">My Search History</a></li>
           </ul>
@@ -38,14 +38,14 @@
     <!-- hero -->
     <section class="uk-cover-container hero uk-flex uk-flex-column uk-flex-middle uk-flex-center uk-padding-large" id="hero">
       <div class="hero-text uk-margin">
-        <img src="assets/img/logo.svg" class="uk-animation-scale-up" width=100 />
+        <img src="assets/img/logo.svg" class="uk-animation-scale-up" width="100px" />
         <h1 class="hero-title uk-animation-scale-up">COVID-19 DATAHUB</h1>
         <p class="hero-subtitle">A free resource to view COVID-19 data and find testing center locations.</p>
       </div>
 
       <div class="uk-button-group uk-flex uk-flex-center hero-buttons">
-        <button class="uk-button uk-button-default" onclick="scrollToStats()">Check Statistics</button>
-        <a class="uk-button uk-button-default uk-margin-left" href="testing-centers.html">Find a Testing Center</a>
+        <button class="uk-button uk-border-rounded uk-button-default" onclick="scrollToStats()">Check Statistics</button>
+        <a class="uk-button uk-border-rounded uk-button-default uk-margin-left" href="testing-centers.html">Find a Testing Center</a>
       </div>
 
       <!-- used for nav so that the header in the next section appears -->
@@ -55,25 +55,54 @@
     <!-- stats section -->
     <section class="uk-container-expand uk-padding-large">
       <div class="section-heading-container">
-        <h2 class="section-title uk-text-center"><span id="location">Worldwide</span> COVID-19 Statistics</h2>
+        <h2 class="section-title uk-text-center">Current COVID-19 Statistics</h2>
       </div>
       <div class="uk-flex uk-flex-column">
 
         <div id="stats-container" class="uk-flex uk-flex-center" uk-grid>
 
           <!-- left column -->
-          <div id="left-column" class="uk-width-1-5">
+          <div id="left-column" class="uk-width-1-3 uk-match-height">
+            <!-- menu for the case type -->
+            <ul uk-tab class="uk-child-width-expand" id="case-type-menu">
+              <li class="uk-active"><a href="#" id="Confirmed">Confirmed</a></li>
+              <li><a href="#" id="Active">Active</a></li>
+              <li><a href="#" id="Recovered">Recoveries</a></li>
+              <li><a id="Deaths">Deaths</a></li>
+            </ul> 
+
+            <!-- highlighted data card -->
+            <div class="uk-card uk-card-default uk-card-body uk-text-center" id="highlighted-stats-container">
+              <p class="uk-badge" id="highlighted-stat-location"></p>
+              <p id="highlighted-stat-value"></p>
+              <p id="highlighted-stat-label"></p>
+            </div>
+
             <!-- search -->
-            <div class="uk-card uk-card-default uk-card-body" id="stat-search">
+            <div class="uk-card uk-card-default uk-card-body uk-margin-top" id="stat-search">
               <div class="uk-search uk-search-default uk-width-1-1">
                 <a href="" class="uk-search-icon-flip uk-margin-small-right" uk-search-icon id="stat-search-icon"></a>
-                <input class="uk-search-input" type="text" placeholder="Search by country" id="stat-search-input" />
+                <input class="uk-search-input" type="text" placeholder="Search for data from another country" id="stat-search-input" />
               </div>
             </div>
 
             <!-- case definitions modal button -->
-            <div class="uk-card uk-card-default uk-margin-top uk-card-body uk-text-center">
-              <button uk-toggle="target: #case-definitions-modal" class="uk-button uk-button-small">Case Definitions</button>
+            <div class="uk-card uk-card-default uk-margin-top">
+              <div class="uk-card-header">
+                <h3 class="uk-card-title">Case Definitions</h3>
+              </div>
+              <dl class="uk-description-list uk-card-body uk-padding-remove-top">
+                <dt>Confirmed</dt>
+                <dd>Presumptive positive cases</dd>
+                <dt>Recovered</dt>
+                <dd>Estimates based on local media reports, and may be substantially lower than the true number</dd>
+                <dt>Active</dt>
+                <dd>Total Confirmed - Total Recovered - Total Deaths</dd>
+                <dt><span uk-icon="arrow-up" class="uk-text-danger"></span></dt>
+                <dd>An increase in new cases since the prior day</dd>
+                <dt><span uk-icon="arrow-down" class="uk-text-success"></span></dt>
+                <dd>A decrease in new cases since the prior day</dd>
+              </dl>
             </div>
 
             <!-- date last updated -->
@@ -85,28 +114,12 @@
 
           <!-- center column -->
           <div id="center-column" class="uk-width-1-2">
-
-            <!-- menu for the case type -->
-            <ul uk-tab class="uk-child-width-expand" id="case-type-menu">
-              <li class="uk-active"><a href="#" id="Confirmed">Confirmed</a></li>
-              <li><a href="#" id="Active">Active</a></li>
-              <li><a href="#" id="Recovered">Recoveries</a></li>
-              <li><a id="Deaths">Deaths</a></li>
-            </ul> 
-
-            <!-- highlighted data card -->
-            <div class="uk-card uk-card-default uk-card-body uk-text-center" id="highlighted-stats-container">
-              <p id="highlighted-stat-value"></p>
-              <p id="highlighted-stat-label"></p>
-            </div>
-
             <!-- case count by country card -->
-            <div class="uk-card uk-card-default uk-card-body uk-margin-top uk-panel">
+            <div class="uk-card uk-card-default">
               <div class="uk-card-header">
-                <h3>Case Count by Country</h3>
+                <h3 class="uk-card-title">Case Count by Country</h3>
               </div>
-
-              <!-- <div class="uk-panel uk-panel-scrollable" style="resize:none; height: 400px;"></div> -->
+              <div class="uk-card-body">
                 <table id="country-case-table" class="uk-table uk-table-middle uk-table-responsive uk-table-divider uk-table-small">
                   <thead>
                       <tr class="uk-panel uk-margin-small-left uk-margin-small-right">
@@ -117,16 +130,17 @@
                         <th class="uk-text-center uk-width-expand">Confirmed</th>
                       </tr>
                   </thead>
-                  <tbody id="case-by-country-data" class="uk-panel uk-panel-scrollable uk-padding-none" style="resize:none; height: 400px;"></tbody>
+                  <tbody id="case-by-country-data" class="uk-panel uk-panel-scrollable uk-padding-none"></tbody>
                 </table>
-              <!-- </div> -->
+              </div>
             </div>
+            
         </div>
     </section>
 
     <footer class="uk-padding">
       <p>This site uses local storage to improve your experience. We do not collect or use any of your data.</p>
-      <button uk-toggle="target: #my-id" class="uk-button uk-button-text">
+      <button uk-toggle="target: #my-id" class="uk-button uk-border-rounded uk-button-text">
         Click here to view your search history.
       </button>
       <p>Built With &#10084; By Vincent Caruso, Jeffrey Dollente, Vanessa Lane, & Ted Pedersen</p>
@@ -139,7 +153,7 @@
             <h2 class="uk-modal-title">SEARCH HISTORY</h2>
             <p>Here we will display user searches stored in local storage.</p>
             <p><a class="uk-link-muted" href="#">Delete My Search History</a></p>
-            <button class="uk-modal-close uk-button uk-button-default" type="button">Close</button>
+            <button class="uk-modal-close uk-button uk-border-rounded uk-button-default" type="button">Close</button>
         </div>
     </div>
 
@@ -158,28 +172,9 @@
             <div id="confirm-location-form-body" class="uk-margin uk-margin-left uk-margin-right uk-margin-top" uk-overflow-auto></div>
           </div>
           <div class="uk-modal-footer uk-text-right" id="confirm-location-form-buttons">
-              <button class="uk-button uk-margin-left" type="submit" id="confirm-location-save">Confirm</button>
+              <button class="uk-button uk-border-rounded uk-margin-left" type="submit" id="confirm-location-save">Confirm</button>
           </div>
         </form>
-      </div>
-    </div>
-
-    <!-- case definitions modal -->
-    <div id="case-definitions-modal" uk-modal>
-      <div class="uk-modal-dialog">
-        <button class="uk-modal-close-default" type="button" uk-close></button>
-        <div class="uk-modal-header">
-          <h2 class="uk-modal-title">Case Definitions</h2>
-        </div>
-        <div class="uk-modal-body">
-          <ul>
-            <li><strong>Confirmed cases</strong> include presumptive positive cases.</li>
-            <li><strong>Recovered cases</strong> are estimates based on local media reports, and may be substantially lower than the true number</li>
-            <li><strong>Active cases</strong> = total confirmed - total recovered - total deaths</li>
-            <li><span uk-icon="arrow-up" style="color:red;"></span> indicates an increase in cases since the prior day</li>
-            <li><span uk-icon="arrow-down" style="color:green;"></span> indicates a decrease in cases since the prior day</li>
-          </ul>
-        </div>
       </div>
     </div>
 
