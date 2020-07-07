@@ -1,54 +1,60 @@
 var globalStats;
 var statsToHighlight;
 
+var addTrendIcon = function(stats, statName, statSection) {
+    var newStatName = statName.replace("Total", "New");
+    if (newStatName in stats) {
+        var trendIcon = $("<span>").addClass("uk-margin-small-left");
+        var statValueElementId = "#" + statSection + "-" + statName + "-value"
+        if (stats[newStatName] > 0) {
+            trendIcon.attr("uk-icon", "icon: chevron-up;");
+            $(statValueElementId).addClass("uk-text-danger");
+        } else if (stats[statName] === 0) {
+            trendIcon.attr("uk-icon", "icon: minus;");
+            $(statValueElementId).addClass("uk-text-success");
+        } else {
+            trendIcon.attr("uk-icon", "icon: minus;");
+            $(statValueElementId).addClass("uk-text-warning");
+        }
+        $(statValueElementId).append(trendIcon);
+    }
+}
+
 var surfaceHighlightedData = function() {
     /**
      * Surfaces the caseload counts for the highlighted data variable:
      *     1. Displays the total counts
-     *     2. Uses the derivative data to determine the arrow direction and font color
+     *     2. Uses the derivative data to determine the icon direction and font color
      */
     
     var statNames = ["TotalActive", "TotalConfirmed", "TotalDeaths", "TotalRecovered"];
     for (let i = 0; i < statNames.length; i++) {
-
         var statName = statNames[i];
+        
+        // clear existing classes
         $("#highlighted-" + statName + "-value").removeClass(["uk-text-danger", "uk-text-success"]);
 
         // calculate active stats
         statsToHighlight.TotalActive = statsToHighlight.TotalConfirmed - statsToHighlight.TotalDeaths - statsToHighlight.TotalRecovered;
         statsToHighlight.NewActive = statsToHighlight.NewConfirmed - statsToHighlight.NewDeaths - statsToHighlight.NewRecovered;
-    
-        // find and update the stat value
+
+        // update the location
+        if (statsToHighlight.Country) {
+            $(".highlighted-stat-location").text(statsToHighlight.Country);
+        } else {
+            $(".highlighted-stat-location").text("Worldwide");
+        }
+
+        // find and display the stat value
         var statValue = statsToHighlight[statName].toLocaleString();
-        if (statValue === 0) {
-            statValue = "-";
-        }
-
-        // add an arrow to denote the change in case load
-        var newStatName = statName.replace("Total", "New");
-        if (newStatName in statsToHighlight) {
-
-            // create the arrow
-            var trendArrow = $("<span>").addClass("uk-margin-left-small");
-            if (statsToHighlight[newStatName] > 0) {
-                trendArrow.attr("uk-icon", "icon: arrow-up;");
-                $("#highlighted-" + statName + "-value").addClass("uk-text-danger");
-            } else {
-                $("#highlighted-" + statName + "-value").addClass("uk-text-warning");
-            }
-
-            // add the arrow and stat label
-            $("#highlighted-" + statName + "-value").text(statValue).append(trendArrow);
-            var displayStatName = statName.replace("Total", "Total ");
-            $("#highlighted-" + statName + "-label").text(displayStatName);
-
-            // add the badge for location
-            if (statsToHighlight.Country) {
-                $(".highlighted-stat-location").text(statsToHighlight.Country);
-            } else {
-                $(".highlighted-stat-location").text("Worldwide");
-            }
-        }
+        $("#highlighted-" + statName + "-value").text(statValue);
+        
+        // add the stat label
+        var displayStatName = statName.replace("Total", "Total ");
+        $("#highlighted-" + statName + "-label").text(displayStatName);
+        
+        // create the icon
+        addTrendIcon(statsToHighlight, statName, "highlighted");
     }
 }
 
@@ -56,9 +62,10 @@ var surfaceCaseByCountryData = function() {
     /**
      * Placeholder function that surfaces case by country data. Eventually should consolidate this into the surfaceHighlightedData function since there's so much repetition
      */
+
     for (let i=0; i < globalStats.Countries.length; i++) {
         var countryStats = globalStats.Countries[i];
-        var countryStatElement = $("<tr>").addClass(["case-by-country-row", "uk-text-nowrap"]).attr("id", countryStats.CountryCode + "-" + "case-load");
+        var countryStatElement = $("<tr>").addClass("uk-width-1-1").attr("id", countryStats.CountryCode + "-" + "case-load");
 
         // calculate active case stats
         countryStats.TotalActive = countryStats.TotalConfirmed - countryStats.TotalDeaths - countryStats.TotalRecovered;
@@ -66,7 +73,7 @@ var surfaceCaseByCountryData = function() {
 
         // save the country name
         countryStatElement.append(
-            $("<td>").text(countryStats.Country).attr("id", countryStats.CountryCode + "-label").addClass("uk-text-left")
+            $("<td>").text(countryStats.Country).attr("id", countryStats.CountryCode + "-label").addClass(["uk-text-left", "uk-width-auto"])
         );
 
         var statNames = ["Active", "Recovered", "Deaths", "Confirmed"]
@@ -74,26 +81,18 @@ var surfaceCaseByCountryData = function() {
             var statName = "Total" + statNames[i];
         
             // find and update the stat value
-            var statValue;
-            if (countryStats[statName] === 0) {
-                statValue = "-";
-            } else {
-                statValue = countryStats[statName].toLocaleString();
-            }
+            var statValue = countryStats[statName].toLocaleString();
     
             // add it to the page if necessary
-            var valueElementId = countryStats.CountryCode + "-" + statNames[i].toLowerCase() + "-value";
-            var arrowElementId = countryStats.CountryCode + "-" + statNames[i].toLowerCase() + "-arrow";
+            var valueElementId = countryStats.CountryCode + "-" + statName + "-value";
+            var iconElementId = countryStats.CountryCode + "-" + statName + "-icon";
             let valueElement = $("#" + valueElementId);
             if (valueElement.length === 0) {
                 $("#case-by-country-data").append(countryStatElement.append(
                     $("<td>")
                         .text(statValue)
-                        .addClass("uk-text-right")
+                        .addClass(["uk-text-right", "uk-width-1-5", "uk-text-nowrap"])
                         .attr("id", valueElementId)
-                        .append(
-                            $("<span>").attr("id", arrowElementId)
-                        )
                     )
                 );
             } else {
@@ -102,21 +101,12 @@ var surfaceCaseByCountryData = function() {
                     .removeClass(["uk-text-danger", "uk-text-success"])
                     .removeAttr("uk-icon")
                     .append(
-                        $("<span>").attr("id", arrowElementId)
+                        $("<span>").attr("id", iconElementId)
                     );
             }
     
-            // create an arrow to denote the change in case load
-            var newStatName = statName.replace("Total", "New");
-            if (newStatName in countryStats ) {
-                var trendIcon = $("<span>").addClass("uk-margin-left-small");
-                if (countryStats[newStatName] > 0) {
-                    trendIcon.attr("uk-icon", "icon: arrow-up").addClass("uk-text-danger");
-                } else if ( countryStats[statName] != 0 ) {
-                    trendIcon.attr("uk-icon", "icon: arrow-down").addClass("uk-text-success");
-                }
-                $("#" + valueElementId).append(trendIcon);
-            }   
+            // add an icon to denote the change in case load
+            addTrendIcon(countryStats, statName, countryStats.CountryCode);
         }
     }
 }

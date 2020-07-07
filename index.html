@@ -125,11 +125,19 @@
                 <dt>Case Count Color Key</dt>
                 <dd>
                   <ul class="uk-list">
-                    <li><span class="uk-text-danger" uk-icon="arrow-up"></span> Case count has increased since the last update</li>
-                    <li><span class="uk-text-success" uk-icon="arrow-down"></span>  No new cases since the last update</li>
+                    <li><span class="uk-text-danger" uk-icon="more"></span> Case count > 0 and increasing</li>
+                    <li><span class="uk-text-warning" uk-icon="more"></span>  Case count > 0 but not increasing</li>
+                    <li><span class="uk-text-success" uk-icon="more"></span>  Case count = 0</li>
                   </ul>
                 </dd>
 
+                <dt>Case Count Icon Key</dt>
+                <dd>
+                  <ul class="uk-list">
+                    <li><span uk-icon="chevron-up"></span> Case count has increased since the last update</li>
+                    <li><span uk-icon="minus"></span>  No new cases since the last update</li>
+                  </ul>
+                </dd>
               </dl>
             </div>
 
@@ -149,17 +157,17 @@
                 <h3 class="uk-card-title">Case Count by Country</h3>
               </div>
               <div class="uk-card-body uk-padding-small">
-                <table id="country-case-table" class="uk-table uk-table-middle uk-table-responsive uk-table-divider uk-table-small uk-padding-none">
+                <table id="country-case-table" class="uk-panel uk-panel-scrollable uk-table uk-table-middle uk-table-responsive uk-table-divider uk-table-small">
                   <thead>
-                    <tr class="uk-panel uk-padding-small uk-padding-remove-vertical">
-                      <th class="uk-text-left uk-width-expand">Country</th>
-                      <th class="uk-text-center uk-width-expand">Active</th>
-                      <th class="uk-text-center uk-width-expand">Recoveries</th>
-                      <th class="uk-text-center uk-width-expand">Deaths</th>
-                      <th class="uk-text-center uk-width-expand">Confirmed</th>
+                    <tr class="uk-padding-remove-vertical uk-width-1-1">
+                      <th class="uk-text-left uk-width-auto">Country</th>
+                      <th class="uk-text-right uk-width-1-5">Active</th>
+                      <th class="uk-text-right uk-width-1-5">Recoveries</th>
+                      <th class="uk-text-right uk-width-1-5">Deaths</th>
+                      <th class="uk-text-right uk-width-1-5">Confirmed</th>
                     </tr>
                   </thead>
-                  <tbody id="case-by-country-data" class="uk-panel uk-panel-scrollable uk-child-width-expand"></tbody>
+                  <tbody id="case-by-country-data"></tbody>
                 </table>
               </div>
             </div>
