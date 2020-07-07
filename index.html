@@ -15,8 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.4/dist/js/uikit.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.4/dist/js/uikit-icons.min.js"></script>    
- 
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.4/dist/js/uikit-icons.min.js"></script>
   </head>
 
   <body>
@@ -39,14 +38,14 @@
     <!-- hero -->
     <section class="uk-cover-container hero uk-flex uk-flex-column uk-flex-middle uk-flex-center uk-padding-large" id="hero">
       <div class="hero-text uk-margin">
-        <img src="assets/img/logo.svg" class="uk-animation-scale-up" width=100 />
+        <img src="assets/img/logo.svg" class="uk-animation-scale-up" width="100px" />
         <h1 class="hero-title uk-animation-scale-up">COVID-19 DATAHUB</h1>
         <p class="hero-subtitle">A free resource to view COVID-19 data and find testing center locations.</p>
       </div>
 
       <div class="uk-button-group uk-flex uk-flex-center hero-buttons">
-        <button class="uk-button uk-button-default" onclick="scrollToStats()">Check Statistics</button>
-        <a class="uk-button uk-button-default uk-margin-left" href="testing-centers.html">Find a Testing Center</a>
+        <button class="uk-button uk-border-rounded uk-button-default" onclick="scrollToStats()">Check Statistics</button>
+        <a class="uk-button uk-border-rounded uk-button-default uk-margin-left" href="testing-centers.html">Find a Testing Center</a>
       </div>
 
       <!-- used for nav so that the header in the next section appears -->
@@ -56,64 +55,131 @@
     <!-- stats section -->
     <section class="uk-container-expand uk-padding-large">
       <div class="section-heading-container">
-        <h2 class="section-title uk-text-center"><span id="location">Worldwide</span> COVID-19 Statistics</h2>
+        <h2 class="section-title uk-text-center">International COVID-19 Statistics</h2>
       </div>
+      <div class="uk-flex uk-flex-column">
+        <div id="stats-container" class="uk-flex uk-flex-center" uk-grid>
 
-      <div id="stats-container" class="uk-flex uk-flex-center" uk-grid>
-        <!-- left column -->
-        <div id="left-column" class="uk-width-1-5">
-          <!-- search -->
-          <div class="uk-card uk-card-default uk-card-body uk-animation-scale-up" id="stat-search">
-            <div class="uk-search uk-search-default uk-width-1-1">
-              <a href="" class="uk-search-icon-flip uk-margin-small-right" uk-search-icon id="stat-search-icon"></a>
-              <input class="uk-search-input" type="text" placeholder="Search by country" id="stat-search-input" />
+          <!-- LEFT COLUMN -->
+          <div id="left-column" class="uk-width-1-3 uk-match-height">
+
+            <!-- highlighted data card -->
+            <div class="uk-card uk-card-default uk-card-body uk-text-center uk-padding-remove-right" id="highlighted-stats-container">
+              <div uk-grid>
+                <ul uk-tab class="uk-tab-left uk-width-1-3" id="case-type-menu" uk-switcher="animation: uk-animation-fade">
+                  <li class="uk-active"><a href="#">Confirmed</a></li>
+                  <li><a href="#">Active</a></li>
+                  <li><a href="#">Recoveries</a></li>
+                  <li><a href="#">Deaths</a></li>
+                </ul>
+                <div class="uk-width-2-3 uk-switcher uk-text-center uk-align-center uk-margin-remove">
+                  <div uk-switcher-item="confirmed" class="uk-margin-small-top">
+                    <p class="uk-label uk-background-muted uk-text-emphasis uk-margin-remove highlighted-stat-location"></p>
+                    <h3 id="highlighted-TotalConfirmed-value" class="uk-margin-small"></h3>
+                    <p id="highlighted-TotalConfirmed-label" class="uk-text-meta uk-margin-small"></p>
+                  </div>
+                  <div uk-switcher-item="active" class="uk-margin-small-top">
+                    <p class="uk-label uk-background-muted uk-text-emphasis uk-margin-remove highlighted-stat-location"></p>
+                    <h3 id="highlighted-TotalActive-value" class="uk-margin-small"></h3>
+                    <p id="highlighted-TotalActive-label" class="uk-text-meta uk-margin-small"></p>
+                  </div>
+                  <div uk-switcher-item="recoveries" class="uk-margin-small-top">
+                    <p class="uk-label uk-background-muted uk-text-emphasis uk-margin-remove highlighted-stat-location"></p>
+                    <h3 id="highlighted-TotalRecovered-value" class="uk-margin-small"></h3>
+                    <p id="highlighted-TotalRecovered-label" class="uk-text-meta uk-margin-small"></p>
+                  </div>
+                  <div uk-switcher-item="deaths" class="uk-margin-small-top">
+                    <p class="uk-label uk-background-muted uk-text-emphasis uk-margin-remove highlighted-stat-location"></p>
+                    <h3 id="highlighted-TotalDeaths-value" class="uk-margin-small"></h3>
+                    <p id="highlighted-TotalDeaths-label" class="uk-text-meta uk-margin-small"></p>
+                  </div>
+                </div>
+              </div>
+
             </div>
-          </div>
-          
-          <!-- date last updated -->
-          <div class="uk-card uk-card-default uk-margin-top uk-card-body uk-animation-scale-up uk-text-meta uk-width-1-1 uk-text-center">
-            <p>Last Updated</p>
-            <p id="date-last-updated"></p>
-          </div>
-        </div>
 
-        <!-- center column -->
-        <div id="center-column" class="uk-width-1-3">
-          <!-- stats -->
-          <div class="uk-card uk-card-default uk-card-body uk-animation-scale-up">
+            <!-- search -->
+            <div class="uk-card uk-card-default uk-card-body uk-margin-top" id="stat-search">
+              <div class="uk-search uk-search-default uk-width-1-1">
+                <a href="" class="uk-search-icon-flip uk-margin-small-right" uk-search-icon id="stat-search-icon"></a>
+                <input class="uk-search-input" type="text" placeholder="Search for data from another country" id="stat-search-input" />
+              </div>
+            </div>
+
+            <!-- case definitions -->
+            <div class="uk-card uk-card-default uk-margin-top">
+              <div class="uk-card-header">
+                <h3 class="uk-card-title">Case Definitions</h3>
+              </div>
+              <dl class="uk-description-list uk-card-body uk-padding-remove-top">
+
+                <dt>Confirmed</dt>
+                <dd>Presumptive positive cases</dd>
+
+                <dt>Recovered</dt>
+                <dd>Estimates based on local media reports, and may be substantially lower than the true number</dd>
+
+                <dt>Active</dt>
+                <dd>Total Confirmed - Total Recovered - Total Deaths</dd>
+
+                <dt>Case Count Color Key</dt>
+                <dd>
+                  <ul class="uk-list">
+                    <li><span class="uk-text-danger" uk-icon="more"></span> Case count > 0 and increasing</li>
+                    <li><span class="uk-text-warning" uk-icon="more"></span>  Case count > 0 but not increasing</li>
+                    <li><span class="uk-text-success" uk-icon="more"></span>  Case count = 0</li>
+                  </ul>
+                </dd>
+
+                <dt>Case Count Icon Key</dt>
+                <dd>
+                  <ul class="uk-list">
+                    <li><span uk-icon="chevron-up"></span> Case count has increased since the last update</li>
+                    <li><span uk-icon="minus"></span>  No new cases since the last update</li>
+                  </ul>
+                </dd>
+              </dl>
+            </div>
+
+            <!-- date last updated -->
+            <div class="uk-card uk-card-default uk-card-small uk-margin-top uk-card-body uk-width-1-1 uk-text-center">
+              <p id="date-last-updated" class="uk-text-meta"></p>
+            </div>
+
+          </div>
+
+          <!-- RIGHT COLUMN -->
+          <div id="center-column" class="uk-width-1-2">
+
+            <!-- case count by country -->
+            <div class="uk-card uk-card-default uk-padding-small">
+              <div class="uk-card-header">
+                <h3 class="uk-card-title">Case Count by Country</h3>
+              </div>
+              <div class="uk-card-body uk-padding-small">
+                <table id="country-case-table" class="uk-panel uk-panel-scrollable uk-table uk-table-middle uk-table-responsive uk-table-divider uk-table-small">
+                  <thead>
+                    <tr class="uk-padding-remove-vertical uk-width-1-1">
+                      <th class="uk-text-left uk-width-auto">Country</th>
+                      <th class="uk-text-right uk-width-1-5">Active</th>
+                      <th class="uk-text-right uk-width-1-5">Recoveries</th>
+                      <th class="uk-text-right uk-width-1-5">Deaths</th>
+                      <th class="uk-text-right uk-width-1-5">Confirmed</th>
+                    </tr>
+                  </thead>
+                  <tbody id="case-by-country-data"></tbody>
+                </table>
+              </div>
+            </div>
             
-            <h3 class="uk-text-center">Case Load</h3>
-            <div uk-grid>
-              <!-- data labels -->
-              <div class="grid-stat-titles uk-text-left uk-width-1-2">
-                  <p>Confirmed:</p>
-                  <p>Active:</p>
-                  <p>Deaths:</p>
-                  <p>Recovered:</p>
-              </div>
-
-              <!-- data values -->
-              <div id="confirmed-cases-container" class="uk-text-right uk-width-1-2">
-                <p id="TotalConfirmed"></p>
-                <p id="TotalActive"></p>
-                <p id="TotalDeaths"></p>
-                <p id="TotalRecovered"></p>
-              </div>
-            </div>
-
-            <!-- button to open modal with stat definitions -->
-            <div class="uk-margin-top uk-text-center">
-              <button uk-toggle="target: #stat-definitions" type="button" class="uk-button">Definitions</button>
-            </div>
           </div>
-        </div>
 
-        <!-- right column -->
+      </div>
     </section>
 
     <footer class="uk-padding">
       <p>This site uses local storage to improve your experience. We do not collect or use any of your data.</p>
-      <button uk-toggle="target: #my-id" class="uk-button uk-button-text">
+      <button uk-toggle="target: #my-id" class="uk-button uk-border-rounded uk-button-text">
         Click here to view your search history.
       </button>
       <p>Built With &#10084; By Vincent Caruso, Jeffrey Dollente, Vanessa Lane, & Ted Pedersen</p>
@@ -126,33 +192,9 @@
             <h2 class="uk-modal-title">SEARCH HISTORY</h2>
             <p>Here we will display user searches stored in local storage.</p>
             <p><a class="uk-link-muted" href="#">Delete My Search History</a></p>
-            <button class="uk-modal-close uk-button uk-button-default" type="button">Close</button>
+            <button class="uk-modal-close uk-button uk-border-rounded uk-button-default" type="button">Close</button>
         </div>
     </div>
-
-    <!-- statistic definitions modal -->
-    <div id="stat-definitions" uk-modal>
-      <div class="uk-modal-dialog">
-        <button class="uk-modal-close-default" type="button" uk-close></button>
-
-        <div class="uk-modal-header">
-          <h2 class="uk-modal-title">Case Load Definitions</h2>
-        </div>
-
-        <div class="uk-modal-body">
-          <ul>
-            <li><strong>Confirmed cases</strong> include presumptive positive cases.</li>
-            <li><strong>Recovered cases</strong> are estimates based on local media reports, and may be substantially lower than the true number</li>
-            <li><strong>Active cases</strong> = total confirmed - total recovered - total deaths</li>
-            <li><span uk-icon="arrow-up" style="color:red;"></span> indicates an increase in cases since the prior day</li>
-            <li><span uk-icon="arrow-down" style="color:green;"></span> indicates a decrease in cases since the prior day</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-
-    <a class="uk-button" href="#confirm-location-modal" uk-toggle>Open</a>
 
     <!-- confirm location modal -->
     <div id="confirm-location-modal" class="uk-modal-container" uk-modal>
@@ -161,27 +203,23 @@
         <div class="uk-modal-header">
           <h2 class="uk-modal-title uk-text-center">Confirm Location</h2>
         </div>
-
-          <form id="confirm-location-form">
-            <div class="uk-modal-body">
-              <p id="confirm-location-form-message">
-                  Your search term matched multiple locations. Please select a location from the list below to continue.
-              </p>
-              <div id="confirm-location-form-body" class="uk-margin uk-margin-left uk-margin-right uk-margin-top" uk-overflow-auto></div>
-            </div>
-            <div class="uk-modal-footer uk-text-right" id="confirm-location-form-buttons">
-                <button class="uk-button uk-margin-left" type="submit" id="confirm-location-save">Confirm</button>
-            </div>
-          </form>
-          
+        <form id="confirm-location-form">
+          <div class="uk-modal-body">
+            <p id="confirm-location-form-message">
+                Your search term matched multiple locations. Please select a location from the list below to continue.
+            </p>
+            <div id="confirm-location-form-body" class="uk-margin uk-margin-left uk-margin-right uk-margin-top" uk-overflow-auto></div>
+          </div>
+          <div class="uk-modal-footer uk-text-right" id="confirm-location-form-buttons">
+              <button class="uk-button uk-border-rounded uk-margin-left" type="submit" id="confirm-location-save">Confirm</button>
+          </div>
+        </form>
       </div>
-  </div>
+    </div>
 
     <!-- custom js -->
-    <script src="assets/js/config.js"></script>
     <script src="assets/js/stats.js"></script>
     <!-- ui stuff -->
     <script src="assets/js/ui.js"></script>
-
   </body>
 </html>
