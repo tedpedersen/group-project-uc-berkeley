@@ -23,8 +23,8 @@
       <nav class="uk-navbar-container uk-navbar" uk-navbar>
         <div class="uk-navbar-left">
           <ul class="uk-navbar-nav">
-            <li id="homeLink" class="uk-active"><a href="index.html"><img src="assets/img/logo-white.svg" width=40/></a></li>
-            <li><a href="index.html#stats">Current Statistics</a></li>
+            <li id="homeLink"><a href="index.html"><img src="assets/img/logo-white.svg" width=40/></a></li>
+            <li id="statNav"><a href="#" onclick="scrollToStats()" id="statLink">Current Statistics</a></li>
             <li><a href="testing-centers.html">Find A Testing Center</a></li>
             <li><a uk-toggle="target: #search-history" id="searchesLink">My Search History</a></li>
           </ul>
@@ -36,9 +36,9 @@
     </section>
 
     <!-- hero -->
-    <section class="uk-cover-container hero uk-flex uk-flex-column uk-flex-middle uk-flex-center uk-padding-large" id="hero">
+    <section class="uk-cover-container hero uk-flex uk-flex-column uk-flex-middle uk-flex-center" id="hero">
       <div class="hero-text uk-margin">
-        <img src="assets/img/logo.svg" class="uk-animation-scale-up" width="100px" />
+        <img src="assets/img/logo.svg" class="uk-animation-scale-up" width="100" />
         <h1 class="hero-title uk-animation-scale-up">COVID-19 DATAHUB</h1>
         <p class="hero-subtitle">A free resource to view COVID-19 data and find testing center locations.</p>
       </div>

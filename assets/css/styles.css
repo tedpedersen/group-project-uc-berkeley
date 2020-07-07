@@ -61,6 +61,8 @@ p {
 .uk-button {
     font-size: inherit;
 }
+.uk-button-default:visited,
+.uk-button:focus,
 .uk-button-default:active,
 .uk-button-default {
     padding: 5px 15px;
@@ -117,14 +119,26 @@ p {
 .uk-navbar-container:not(.uk-navbar-transparent) ul li a{
     color: var(--light-text-color);
     font-weight: 400;
-    opacity: .7;
+    opacity: .5;
+    transition: opacity .4s ease-out;
+    -moz-transition: opacity .4s ease-out;
+    -webkit-transition: opacity .4s ease-out;
+    -o-transition: opacity .4s ease-out;
 }
 .uk-navbar-container ul li a:hover {
-    font-weight: 700;
+
     opacity: 1;
 }
+.uk-navbar-container ul li a::before {
+    display: block;
+    content: attr(title);
+
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
 ul.uk-navbar-nav li.uk-active a{
-    font-weight: 700;
+
     opacity: 1;
 }
 .uk-panel {

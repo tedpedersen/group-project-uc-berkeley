@@ -21,8 +21,8 @@
       <nav class="uk-navbar-container uk-navbar" uk-navbar>
         <div class="uk-navbar-left">
           <ul class="uk-navbar-nav">
-            <li id="homeLink" class="uk-active"><a href="index.html"><img src="assets/img/logo-white.svg" width=40/></a></li>
-            <li><a href="index.html#stats">Current Statistics</a></li>
+            <li id="homeLink"><a href="index.html"><img src="assets/img/logo-white.svg" width=40/></a></li>
+            <li><a href="index.html#stats" id="statLink">Current Statistics</a></li>
             <li class="uk-active"><a href="testing-centers.html">Find A Testing Center</a></li>
             <li><a uk-toggle="target: #my-id" id="searchesLink">My Search History</a></li>
           </ul>
@@ -86,11 +86,11 @@
         <button class="uk-modal-close uk-button uk-button-default" type="button">Close</button>
       </div>
     </div>
-    <script src="assets/js/config.js"></script>
     <!-- our google map script -->
     <script src="assets/js/map.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5lO6ZjBp8Lwt5abqQ1GQBmVWxEerWGUY&libraries=places&callback=initMap"
         async defer></script>
+    <script src="assets/js/ui.js"></script>
 
   </body>
 </html>
