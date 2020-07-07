@@ -61,6 +61,7 @@ p {
 .uk-button {
     font-size: inherit;
 }
+.uk-button-default:active,
 .uk-button-default {
     padding: 5px 15px;
     background-color: var(--light-purple);
