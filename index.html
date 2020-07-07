@@ -23,17 +23,32 @@
       <nav class="uk-navbar-container uk-navbar" uk-navbar>
         <div class="uk-navbar-left">
           <ul class="uk-navbar-nav">
+            <li  id="mobileNav">
+              <div>
+              <nav role="navigation">
+                <div id="menuToggle">
+                  <input type="checkbox" />
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <ul id="menu">
+                    <li><a href="#" onclick="scrollToStats()">Current Statistics</a></li>
+                    <li><a href="testing-centers.html">Find A Testing Center</a></li>
+                    <li><a uk-toggle="target: #search-history">My Search History</a></li>
+                  </ul>
+                </div>
+              </nav>
+              </div>
+            </li>
             <li id="homeLink"><a href="index.html"><img src="assets/img/logo-white.svg" width=40/></a></li>
             <li id="statNav"><a href="#" onclick="scrollToStats()" id="statLink">Current Statistics</a></li>
-            <li><a href="testing-centers.html">Find A Testing Center</a></li>
-            <li><a uk-toggle="target: #search-history" id="searchesLink">My Search History</a></li>
+            <li id="mapLink"><a href="testing-centers.html">Find A Testing Center</a></li>
+            <li id="historyLink"><a uk-toggle="target: #search-history" id="searchesLink">My Search History</a></li>
           </ul>
-        </div>
-        <div class="uk-navbar-right">
-          <ul>
         </div>
       </nav>
     </section>
+
 
     <!-- hero -->
     <section class="uk-cover-container hero uk-flex uk-flex-column uk-flex-middle uk-flex-center" id="hero">

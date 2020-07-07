@@ -21,10 +21,27 @@
       <nav class="uk-navbar-container uk-navbar" uk-navbar>
         <div class="uk-navbar-left">
           <ul class="uk-navbar-nav">
+            <li  id="mobileNav">
+              <div>
+              <nav role="navigation">
+                <div id="menuToggle">
+                  <input type="checkbox" />
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <ul id="menu">
+                    <li><a href="index.html#stats">Current Statistics</a></li>
+                    <li><a href="#">Find A Testing Center</a></li>
+                    <li><a uk-toggle="target: #search-history">My Search History</a></li>
+                  </ul>
+                </div>
+              </nav>
+              </div>
+            </li>
             <li id="homeLink"><a href="index.html"><img src="assets/img/logo-white.svg" width=40/></a></li>
-            <li><a href="index.html#stats" id="statLink">Current Statistics</a></li>
-            <li class="uk-active"><a href="testing-centers.html">Find A Testing Center</a></li>
-            <li><a uk-toggle="target: #my-id" id="searchesLink">My Search History</a></li>
+            <li id="statLink"><a href="index.html#stats" id="statLink">Current Statistics</a></li>
+            <li id="mapLink" class="uk-active"><a href="testing-centers.html">Find A Testing Center</a></li>
+            <li id="historyLink"><a uk-toggle="target: #my-id" id="searchesLink">My Search History</a></li>
           </ul>
         </div>
         <div class="uk-navbar-right">
