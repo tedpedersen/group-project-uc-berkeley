@@ -58,6 +58,7 @@ p {
     font-size: inherit;
     border-radius: 4px;
 }
+.uk-button-default:active,
 .uk-button-default {
     padding: 5px 15px;
     background-color: var(--light-purple);
