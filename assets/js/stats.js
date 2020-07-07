@@ -2,6 +2,10 @@ var globalStats;
 var statsToHighlight;
 
 var addTrendIcon = function(stats, statName, statSection) {
+    /**
+     * Helper function to create trend icons
+     */
+    
     var newStatName = statName.replace("Total", "New");
     if (newStatName in stats) {
         var trendIcon = $("<span>").addClass("uk-margin-small-left");
@@ -26,7 +30,7 @@ var surfaceHighlightedData = function() {
      *     1. Displays the total counts
      *     2. Uses the derivative data to determine the icon direction and font color
      */
-    
+
     var statNames = ["TotalActive", "TotalConfirmed", "TotalDeaths", "TotalRecovered"];
     for (let i = 0; i < statNames.length; i++) {
         var statName = statNames[i];
