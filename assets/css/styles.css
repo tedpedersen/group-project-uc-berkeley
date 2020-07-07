@@ -138,7 +138,6 @@ p {
     visibility: hidden;
 }
 ul.uk-navbar-nav li.uk-active a{
-
     opacity: 1;
 }
 .uk-panel {
@@ -275,10 +274,6 @@ html, body {
     font-weight: 700;
     padding: 6px 12px;
 }
-.uk-tab>.uk-active>a{
-    border-color: #906DE4;
-}
-
 /* typeahead for states */
 .uk-cover-container.stats{
     overflow: visible;
@@ -318,7 +313,22 @@ html, body {
 .uk-navbar-container .uk-navbar{
     background-color: #906DE4; 
 }
-
+.uk-tab{
+    padding: 0;
+    margin-left: -5px;
+}
+.uk-tab li a{
+    font-size: 13px;
+    padding: 0;
+}
+.uk-tab>.uk-active>a{
+    border-color: #906DE4;
+    color: #906DE4;
+    font-weight: 700;
+}
+#mobileNav{
+    visibility: hidden;
+}
 /* Tablets and Smaller */
 @media screen and (max-width: 768px) {
     h2 {
@@ -354,13 +364,9 @@ html, body {
         margin-top: 20px;
     }
     #stats-container {
-        padding: 0px;
+        padding: 0px 15px;
     }
 }
-#mobileNav{
-    visibility: hidden;
-}
-
 /* Mobile Phones and Smaller */
 @media screen and (max-width: 575px) {
     h2 {
@@ -395,6 +401,24 @@ html, body {
     }
     .hero-title{
         margin-top: 25px;
+    }
+    footer .uk-button-text,
+    footer p{
+        font-size: 2.5em;
+    }
+    .uk-tab{
+        margin-left: 80px;
+    }
+    .uk-table td{
+        font-size: 12px;
+    }
+    #stats-container .uk-search,
+    #stats-container .uk-description-list,
+    #stats-container {
+        padding: 0px 50px;
+    }
+    body{
+        overflow-x: hidden;
     }
 }
 /* mobile nav */
@@ -450,13 +474,10 @@ html, body {
    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
    background: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
  }
-
- 
  #menuToggle span:first-child
  {
    transform-origin: 0% 0%;
  }
- 
  #menuToggle span:nth-last-child(2)
  {
    transform-origin: 0% 100%;
@@ -476,7 +497,6 @@ html, body {
  {
    transform: rotate(-45deg) translate(0, -1px);
  }
-
  #menu
  {
    position: absolute;
@@ -484,12 +504,10 @@ html, body {
    margin: -100px 0 0 -50px;
    padding: 50px;
    padding-top: 125px;
-   
    background: #ededed;
    list-style-type: none;
    -webkit-font-smoothing: antialiased;
    /* to stop flickering of text in safari */
-   
    transform-origin: 0% 0%;
    transform: translate(-100%, 0);
    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
