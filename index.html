@@ -63,19 +63,39 @@
           <!-- LEFT COLUMN -->
           <div id="left-column" class="uk-width-1-3 uk-match-height">
 
-            <!-- menu for the case type -->
-            <ul uk-tab class="uk-child-width-expand" id="case-type-menu">
-              <li class="uk-active"><a href="#" id="Confirmed">Confirmed</a></li>
-              <li><a href="#" id="Active">Active</a></li>
-              <li><a href="#" id="Recovered">Recoveries</a></li>
-              <li><a id="Deaths">Deaths</a></li>
-            </ul> 
-
             <!-- highlighted data card -->
-            <div class="uk-card uk-card-default uk-card-body uk-text-center" id="highlighted-stats-container">
-              <p class="uk-badge" id="highlighted-stat-location"></p>
-              <p id="highlighted-stat-value"></p>
-              <p id="highlighted-stat-label"></p>
+            <div class="uk-card uk-card-default uk-card-body uk-text-center uk-padding-remove-right" id="highlighted-stats-container">
+              <div uk-grid>
+                <ul uk-tab class="uk-tab-left uk-width-1-3" id="case-type-menu" uk-switcher="animation: uk-animation-fade">
+                  <li class="uk-active"><a href="#">Confirmed</a></li>
+                  <li><a href="#">Active</a></li>
+                  <li><a href="#">Recoveries</a></li>
+                  <li><a href="#">Deaths</a></li>
+                </ul>
+                <div class="uk-width-2-3 uk-switcher uk-text-center uk-align-center uk-margin-remove">
+                  <div uk-switcher-item="confirmed" class="uk-margin-small-top">
+                    <p class="uk-label uk-background-muted uk-text-emphasis uk-margin-remove highlighted-stat-location"></p>
+                    <h3 id="highlighted-TotalConfirmed-value" class="uk-margin-small"></h3>
+                    <p id="highlighted-TotalConfirmed-label" class="uk-text-meta uk-margin-small"></p>
+                  </div>
+                  <div uk-switcher-item="active" class="uk-margin-small-top">
+                    <p class="uk-label uk-background-muted uk-text-emphasis uk-margin-remove highlighted-stat-location"></p>
+                    <h3 id="highlighted-TotalActive-value" class="uk-margin-small"></h3>
+                    <p id="highlighted-TotalActive-label" class="uk-text-meta uk-margin-small"></p>
+                  </div>
+                  <div uk-switcher-item="recoveries" class="uk-margin-small-top">
+                    <p class="uk-label uk-background-muted uk-text-emphasis uk-margin-remove highlighted-stat-location"></p>
+                    <h3 id="highlighted-TotalRecovered-value" class="uk-margin-small"></h3>
+                    <p id="highlighted-TotalRecovered-label" class="uk-text-meta uk-margin-small"></p>
+                  </div>
+                  <div uk-switcher-item="deaths" class="uk-margin-small-top">
+                    <p class="uk-label uk-background-muted uk-text-emphasis uk-margin-remove highlighted-stat-location"></p>
+                    <h3 id="highlighted-TotalDeaths-value" class="uk-margin-small"></h3>
+                    <p id="highlighted-TotalDeaths-label" class="uk-text-meta uk-margin-small"></p>
+                  </div>
+                </div>
+              </div>
+
             </div>
 
             <!-- search -->
@@ -92,23 +112,30 @@
                 <h3 class="uk-card-title">Case Definitions</h3>
               </div>
               <dl class="uk-description-list uk-card-body uk-padding-remove-top">
+
                 <dt>Confirmed</dt>
                 <dd>Presumptive positive cases</dd>
+
                 <dt>Recovered</dt>
                 <dd>Estimates based on local media reports, and may be substantially lower than the true number</dd>
+
                 <dt>Active</dt>
                 <dd>Total Confirmed - Total Recovered - Total Deaths</dd>
-                <dt><span uk-icon="arrow-up" class="uk-text-danger"></span></dt>
-                <dd>An increase in new cases since the prior day</dd>
-                <dt><span uk-icon="arrow-down" class="uk-text-success"></span></dt>
-                <dd>A decrease in new cases since the prior day</dd>
+
+                <dt>Case Count Color Key</dt>
+                <dd>
+                  <ul class="uk-list">
+                    <li><span class="uk-text-danger" uk-icon="arrow-up"></span> Case count has increased since the last update</li>
+                    <li><span class="uk-text-success" uk-icon="arrow-down"></span>  No new cases since the last update</li>
+                  </ul>
+                </dd>
+
               </dl>
             </div>
 
             <!-- date last updated -->
-            <div class="uk-card uk-card-default uk-margin-top uk-card-body uk-text-meta uk-width-1-1 uk-text-center">
-              <p>Last Updated</p>
-              <p id="date-last-updated"></p>
+            <div class="uk-card uk-card-default uk-card-small uk-margin-top uk-card-body uk-width-1-1 uk-text-center">
+              <p id="date-last-updated" class="uk-text-meta"></p>
             </div>
 
           </div>
@@ -117,14 +144,14 @@
           <div id="center-column" class="uk-width-1-2">
 
             <!-- case count by country -->
-            <div class="uk-card uk-card-default">
+            <div class="uk-card uk-card-default uk-padding-small">
               <div class="uk-card-header">
                 <h3 class="uk-card-title">Case Count by Country</h3>
               </div>
-              <div class="uk-card-body">
-                <table id="country-case-table" class="uk-table uk-table-middle uk-table-responsive uk-table-divider uk-table-small">
+              <div class="uk-card-body uk-padding-small">
+                <table id="country-case-table" class="uk-table uk-table-middle uk-table-responsive uk-table-divider uk-table-small uk-padding-none">
                   <thead>
-                    <tr class="uk-panel uk-margin-small-left uk-margin-small-right">
+                    <tr class="uk-panel uk-padding-small uk-padding-remove-vertical">
                       <th class="uk-text-left uk-width-expand">Country</th>
                       <th class="uk-text-center uk-width-expand">Active</th>
                       <th class="uk-text-center uk-width-expand">Recoveries</th>
@@ -132,7 +159,7 @@
                       <th class="uk-text-center uk-width-expand">Confirmed</th>
                     </tr>
                   </thead>
-                  <tbody id="case-by-country-data" class="uk-panel uk-panel-scrollable uk-padding-none"></tbody>
+                  <tbody id="case-by-country-data" class="uk-panel uk-panel-scrollable uk-child-width-expand"></tbody>
                 </table>
               </div>
             </div>

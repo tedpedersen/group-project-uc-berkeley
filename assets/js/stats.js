@@ -8,48 +8,46 @@ var surfaceHighlightedData = function() {
      *     2. Uses the derivative data to determine the arrow direction and font color
      */
     
-    $("#highlighted-stat-value").removeClass(["uk-text-danger", "uk-text-success"]);
-    
-    var selectedStatType = $("#case-type-menu > li.uk-active > a").attr("id");
+    var statNames = ["TotalActive", "TotalConfirmed", "TotalDeaths", "TotalRecovered"];
+    for (let i = 0; i < statNames.length; i++) {
 
-    // calculate active stats if active is selected
-    if (selectedStatType == "Active") {
+        var statName = statNames[i];
+        $("#highlighted-" + statName + "-value").removeClass(["uk-text-danger", "uk-text-success"]);
+
+        // calculate active stats
         statsToHighlight.TotalActive = statsToHighlight.TotalConfirmed - statsToHighlight.TotalDeaths - statsToHighlight.TotalRecovered;
         statsToHighlight.NewActive = statsToHighlight.NewConfirmed - statsToHighlight.NewDeaths - statsToHighlight.NewRecovered;
-    }
-
-    var statName = "Total" + selectedStatType;
     
-    // find and update the stat value
-    var statValue = statsToHighlight[statName].toLocaleString();
-    if (statValue === 0) {
-        statValue = "-";
-    }
-
-    // add an arrow to denote the change in case load
-    var newStatName = statName.replace("Total", "New");
-    if (newStatName in statsToHighlight) {
-
-        // create the arrow
-        var trendArrow = $("<span>").addClass("uk-margin-left-small");
-        if (statsToHighlight[newStatName] > 0) {
-            trendArrow.attr("uk-icon", "icon: arrow-up;");
-            $("#highlighted-stat-value").addClass("uk-text-danger");
-        } else {
-            trendArrow.attr("uk-icon", "icon: arrow-down;");
-            $("#highlighted-stat-value").addClass("uk-text-success");
+        // find and update the stat value
+        var statValue = statsToHighlight[statName].toLocaleString();
+        if (statValue === 0) {
+            statValue = "-";
         }
 
-        // add the arrow and stat label
-        $("#highlighted-stat-value").text(statValue).append(trendArrow);
-        var displayStatName = statName.replace("Total", "Total ");
-        $("#highlighted-stat-label").text(displayStatName);
+        // add an arrow to denote the change in case load
+        var newStatName = statName.replace("Total", "New");
+        if (newStatName in statsToHighlight) {
 
-        // add the badge for location
-        if (statsToHighlight.Country) {
-            $("#highlighted-stat-location").text(statsToHighlight.Country);
-        } else {
-            $("#highlighted-stat-location").text("Worldwide");
+            // create the arrow
+            var trendArrow = $("<span>").addClass("uk-margin-left-small");
+            if (statsToHighlight[newStatName] > 0) {
+                trendArrow.attr("uk-icon", "icon: arrow-up;");
+                $("#highlighted-" + statName + "-value").addClass("uk-text-danger");
+            } else {
+                $("#highlighted-" + statName + "-value").addClass("uk-text-warning");
+            }
+
+            // add the arrow and stat label
+            $("#highlighted-" + statName + "-value").text(statValue).append(trendArrow);
+            var displayStatName = statName.replace("Total", "Total ");
+            $("#highlighted-" + statName + "-label").text(displayStatName);
+
+            // add the badge for location
+            if (statsToHighlight.Country) {
+                $(".highlighted-stat-location").text(statsToHighlight.Country);
+            } else {
+                $(".highlighted-stat-location").text("Worldwide");
+            }
         }
     }
 }
@@ -76,9 +74,11 @@ var surfaceCaseByCountryData = function() {
             var statName = "Total" + statNames[i];
         
             // find and update the stat value
-            var statValue = countryStats[statName].toLocaleString();
-            if (statValue === 0) {
+            var statValue;
+            if (countryStats[statName] === 0) {
                 statValue = "-";
+            } else {
+                statValue = countryStats[statName].toLocaleString();
             }
     
             // add it to the page if necessary
@@ -108,15 +108,15 @@ var surfaceCaseByCountryData = function() {
     
             // create an arrow to denote the change in case load
             var newStatName = statName.replace("Total", "New");
-            if (newStatName in countryStats) {
+            if (newStatName in countryStats ) {
+                var trendIcon = $("<span>").addClass("uk-margin-left-small");
                 if (countryStats[newStatName] > 0) {
-                    $("#" + arrowElementId).attr("uk-icon", "icon: arrow-up;");
-                    $("#" + valueElementId).addClass(["uk-text-danger", "uk-margin-right"]);
-                } else {
-                    $("#" + arrowElementId).attr("uk-icon", "icon: arrow-down;");
-                    $("#" + valueElementId).addClass(["uk-text-success", "uk-margin-right"]);
+                    trendIcon.attr("uk-icon", "icon: arrow-up").addClass("uk-text-danger");
+                } else if ( countryStats[statName] != 0 ) {
+                    trendIcon.attr("uk-icon", "icon: arrow-down").addClass("uk-text-success");
                 }
-            }
+                $("#" + valueElementId).append(trendIcon);
+            }   
         }
     }
 }
@@ -172,7 +172,7 @@ var getCaseLoadData = function() {
                 // update the last updated date
                 var dateLastUpdated = data.Countries[0].Date;
                 dateLastUpdated = moment(dateLastUpdated).format("MMMM Do, YYYY [at] h:mm A");
-                $("#date-last-updated").text(dateLastUpdated);
+                $("#date-last-updated").text("Last Updated " + dateLastUpdated);
             })
         } else {
             console.log(res.text);
@@ -301,14 +301,6 @@ $("#confirm-location-form").submit(function(event) {
         $("#confirm-location-form-message").addClass("uk-text-danger");
     }
 })
-
-$("#case-type-menu").click(function() {
-    /**
-     * Surfaces Confirmed, Active, Recovered, and Deaths based on the menu selection
-     */
-    surfaceHighlightedData();
-    surfaceCaseByCountryData();
-});
 
 // ON LOAD
 getCaseLoadData();
