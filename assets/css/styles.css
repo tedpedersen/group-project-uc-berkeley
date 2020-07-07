@@ -328,7 +328,7 @@ html, body, #map, #map-wrapper {
     opacity:0
 }
 #map-wrapper {
-    background:url(http://ressio.github.io/lazy-load-xt/dist/loading.gif) center center no-repeat
+    background:url(../img/loader.gif) center center no-repeat
 }
 
 /* Tablets and Smaller */
