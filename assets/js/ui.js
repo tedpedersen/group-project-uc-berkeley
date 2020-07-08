@@ -14,6 +14,13 @@ var statNav = document.getElementById("statNav");
 if (url.search("#stats") >= 0) {
     statNav.classList.add("uk-active");
 }
+//close mobile nav when clicking link
+$("#menu li a").click(function(){   
+    $("#navClose"). prop("checked", false);
+    alert("hi!");
+});
+
+
 //change the stat layout if mobile
 function checkMobile(){
     if (window.matchMedia("(max-width: 767px)").matches) 
