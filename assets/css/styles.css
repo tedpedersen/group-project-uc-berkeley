@@ -205,6 +205,10 @@ footer p {
 * element that contains the map. */
 #map {
     height: 100%;
+    opacity:0
+}
+#map-wrapper {
+    background:url(../img/loader.gif) center center no-repeat
 }
 /* Optional: Makes the sample page fill the window. */
 html, body {
@@ -458,7 +462,6 @@ html, body {
    z-index: 2; /* and place it over the hamburger */
    -webkit-touch-callout: none;
  }
-
  #menuToggle span
  {
    display: block;
