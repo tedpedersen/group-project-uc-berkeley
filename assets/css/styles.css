@@ -373,6 +373,10 @@ html, body {
 }
 /* Mobile Phones and Smaller */
 @media screen and (max-width: 575px) {
+    #map-wrapper {
+        width: 80%;
+        margin: 0 auto;
+    }
     h2 {
         font-size: 9vw;
     }
