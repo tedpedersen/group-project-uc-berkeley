@@ -17,7 +17,6 @@ if (url.search("#stats") >= 0) {
 //close mobile nav when clicking link
 $("#menu li a").click(function(){   
     $("#navClose"). prop("checked", false);
-    alert("hi!");
 });
 
 
