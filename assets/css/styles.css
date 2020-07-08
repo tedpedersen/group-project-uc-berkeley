@@ -413,7 +413,12 @@ html, body {
     }
     .uk-table-small td,
     .uk-table-small th{
-        padding: 0;
+        padding: 0 2px;
+    }
+    .uk-table-small th{
+        font-size: 10px;
+        font-weight: 700;
+        text-align: left;
     }
  
 }

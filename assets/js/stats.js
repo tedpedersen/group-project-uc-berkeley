@@ -96,7 +96,7 @@ var surfaceCaseByCountryData = function() {
                 $("#case-by-country-data").append(countryStatElement.append(
                     $("<td>")
                         .text(statValue)
-                        .addClass(["uk-text-right", "uk-width-1-5", "uk-text-nowrap"])
+                        .addClass(["uk-text-left", "uk-width-1-5", "uk-text-nowrap"])
                         .attr("id", valueElementId)
                     )
                 );
