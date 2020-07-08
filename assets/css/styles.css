@@ -278,31 +278,6 @@ html, body {
     font-weight: 700;
     padding: 6px 12px;
 }
-/* typeahead for states */
-.uk-cover-container.stats{
-    overflow: visible;
-}
-.tt-menu {
-    font-size: 1.5em;
-    text-align: left;
-    color: var(--dark-purple);
-    width: 422px;
-    margin: 5px 0;
-    padding: 0;
-    background-color: #fff;
-    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-    box-shadow: 0 5px 10px rgba(0,0,0,.2);
-    position: relative;
-}
-.tt-suggestion{
-    padding: 5px;
-}
-.tt-cursor{
-    color: #fff;
-    background-color: #906DE4;
-}
-
 #firstHeading {
     font-size: 20px;
 }
