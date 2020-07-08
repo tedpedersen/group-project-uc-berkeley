@@ -234,12 +234,15 @@ var surfaceSpecificLocation = function(addressComponents) {
             $("#location").text(countryName);
 
             //Add searched country to history list and save to localStorage
-            $(".searched-locations").append('<li class="list-group-item">' + countryName + '</li>')
             var listContents = [];
-            $(".searched-locations").each(function(){
-               listContents.push(this.innerHTML);
-            })
-            localStorage.setItem('savedSearches', JSON.stringify(listContents));
+            
+            if (!localStorage.getItem('savedSearches').includes(countryName)) {
+                $(".searched-locations").append('<li class="list-group-item">' + countryName + '</li>')
+                $(".searched-locations").each(function(){
+                listContents.push(this.innerHTML);
+                })
+                localStorage.setItem('savedSearches', JSON.stringify(listContents));
+            }
         }
     }
 }
