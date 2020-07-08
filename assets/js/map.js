@@ -55,6 +55,11 @@ function initMap() {
     center: { lat: 37.09024, lng: -95.712891 },
     zoom: 4,
   });
+  google.maps.event.addListenerOnce(map, 'tilesloaded', function () {
+    $(this.getDiv()).animate({
+        opacity: 1
+    })
+  });
   var card = document.getElementById("pac-card");
   var input = document.getElementById("pac-input");
   var types = document.getElementById("type-selector");
