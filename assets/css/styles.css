@@ -185,6 +185,20 @@ ul.uk-navbar-nav li.uk-active a{
 .search-history-button {
     width: auto;
 }
+
+#search-history .searched-locations {
+    overflow:hidden; overflow-y:scroll;
+    list-style: none;
+}
+
+.list-group-item {
+    font-size: larger;
+}
+
+.list-group-item:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    cursor: pointer
+}
 /* search history styles end */
 
 /* footer styles */
