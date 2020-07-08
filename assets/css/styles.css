@@ -407,9 +407,7 @@ html, body {
     #stats-container {
         padding: 0px 50px;
     }
-    #stats-container .uk-description-list{
-        margin: 0 80x;
-    }
+
     body{
         overflow-x: hidden;
     }
@@ -417,9 +415,7 @@ html, body {
     .uk-table-small th{
         padding: 0;
     }
-    #country-case-table{
-        margin: 0 100px  0 0;
-    }
+ 
 }
 /* mobile nav */
  #menuToggle
