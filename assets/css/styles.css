@@ -207,6 +207,13 @@ footer p {
     height: 100%;
     opacity:0;
 }
+#strict-bounds-selector,
+#type-selector{
+    display: none;
+}
+#pac-input{
+    margin-top: 10px;
+}
 #map-wrapper {
     background:url(../img/loader.gif) center center no-repeat;
     height: 100%
