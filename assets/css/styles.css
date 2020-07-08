@@ -535,3 +535,6 @@ html, body {
  {
    transform: none;
  }
+ .gmnoprint{
+     display: none;
+ }
