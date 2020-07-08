@@ -59,6 +59,9 @@ function initMap() {
     $(this.getDiv()).animate({
         opacity: 1
     })
+    $("#pac-card").animate({
+      opacity: 1
+    })
   });
   var card = document.getElementById("pac-card");
   var input = document.getElementById("pac-input");

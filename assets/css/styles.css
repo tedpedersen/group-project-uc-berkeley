@@ -211,6 +211,9 @@ footer p {
 #type-selector{
     display: none;
 }
+#pac-card{
+    opacity: 0;
+}
 #pac-input{
     margin-top: 10px;
 }
