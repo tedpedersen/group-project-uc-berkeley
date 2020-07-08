@@ -410,6 +410,9 @@ html, body {
     footer p{
         font-size: 2.5em;
     }
+    .uk-tab{
+        margin-left: 10px;
+    }
     .uk-table td{
         font-size: 10px;
     }
