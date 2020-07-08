@@ -1,6 +1,7 @@
 var globalStats;
 var statsToHighlight;
 
+
 var addTrendIcon = function(stats, statName, statSection) {
     /**
      * Helper function to create trend icons
