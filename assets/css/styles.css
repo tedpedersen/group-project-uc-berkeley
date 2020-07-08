@@ -400,15 +400,25 @@ html, body {
         margin-left: 80px;
     }
     .uk-table td{
-        font-size: 12px;
+        font-size: 10px;
     }
     #stats-container .uk-search,
     #stats-container .uk-description-list,
     #stats-container {
         padding: 0px 50px;
     }
+    #stats-container .uk-description-list{
+        margin: 0 80x;
+    }
     body{
         overflow-x: hidden;
+    }
+    .uk-table-small td,
+    .uk-table-small th{
+        padding: 0;
+    }
+    #country-case-table{
+        margin: 0 100px  0 0;
     }
 }
 /* mobile nav */
