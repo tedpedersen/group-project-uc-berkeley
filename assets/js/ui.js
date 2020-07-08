@@ -1,7 +1,7 @@
 // smooth scrolling for homepage link
 function scrollToStats(div){
     $('html, body').animate({
-        scrollTop: $("#stats-container").offset().top + -160
+        scrollTop: $("#stats-container").offset().top + -200
 },500);
 //dynamically add active style to nav links
 $(".uk-navbar-container ul li").click(function(){   
