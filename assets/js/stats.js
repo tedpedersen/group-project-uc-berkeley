@@ -232,10 +232,42 @@ var surfaceSpecificLocation = function(addressComponents) {
             statsToHighlight = globalStats.Countries[i];
             surfaceHighlightedData();
             $("#location").text(countryName);
+
+            //Add searched country to history list and save to localStorage
+            $(".searched-locations").append('<li class="list-group-item">' + countryName + '</li>')
+            var listContents = [];
+            $(".searched-locations").each(function(){
+               listContents.push(this.innerHTML);
+            })
+            localStorage.setItem('savedSearches', JSON.stringify(listContents));
         }
     }
 }
 
+//load localStorage
+function loadStorage() {
+    if (localStorage.getItem('savedSearches')){
+        var listContents = JSON.parse(localStorage.getItem('savedSearches'));
+        $(".searched-locations").each(function(i){
+          this.innerHTML = listContents [i];
+        })
+    }
+}
+loadStorage();
+
+//search for country from history
+$("#search-history ul").click(function (event) {
+    event.preventDefault();
+    UIkit.modal("#search-history").hide();
+    countryName = $(event.target).text();
+    getSpecificLocation(countryName)
+    $("#location").text(countryName);
+});
+
+$("#delete-search-history").click(function (event) {
+    localStorage.clear();
+    $(".list-group-item").remove();
+})
 
 // EVENT LISTENERS
 var statSearchInput = $('#stat-search-input')[0];
