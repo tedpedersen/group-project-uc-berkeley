@@ -148,11 +148,7 @@ function initMap() {
 
   //Loop over states array and fetch API for each
   for (var i = 0; i < statesArray.length; i++) {
-    fetch(
-      "https://covid-19-testing.github.io/locations/" +
-      statesArray[i] +
-      "/complete.json"
-    )
+    fetch("https://covid-19-testing.github.io/locations/" + statesArray[i] + "/complete.json")
       .then(function (response) {
         if (response.ok) {
           response.json().then(function (data) {
@@ -161,6 +157,8 @@ function initMap() {
               //get location's data for info windows
               const locationName = data[i].name;
               const locationDescription = data[i].description;
+
+              //check if phone number / address exist for location
               if (data[i].physical_address === undefined) {
                 var phoneNumber = "Unknown";
               } else {
@@ -170,48 +168,53 @@ function initMap() {
                     ", " +
                     data[i].physical_address[0].city;
 
-                  //get a latitude/longitude for each location in data array
-                  var latLng = geocodeData[locationName];
-                  
-                  //create info window and append to marker
-                  var contentString =
-                    '<div id="infoWindowContent">' +
-                    '<div id="siteNotice">' +
-                    "</div>" +
-                    '<h1 id="firstHeading" class="firstHeading">' +
-                    locationName +
-                    "</h1>" +
-                    '<div id="infoWindowBodyContent">' +
-                    '<p class="infoWindowParagraph">' +
-                    locationDescription +
-                    "<br>" +
-                    "<p/>" +
-                    '<p class="infoWindowParagraph">' +
-                    "Address: " +
-                    readableStreetNameNumberCity +
-                    "<br>" +
-                    "Phone Number: " +
-                    phoneNumber +
-                    "</p>" +
-                    "</div>" +
-                    "</div>";
-                  var infowindow = new google.maps.InfoWindow({
-                    content: contentString,
-                  });
+                  var makeMarkers = function () {
+                    //get a latitude/longitude for each location in data array
+                    //geocodeData was obtained from Google Maps API one time and then stored
+                    //it was too expensive to fetch the data for hundreds of places on every load
+                    var latLng = geocodeData[locationName];
 
-                  //set marker using latLng
-                  var marker = new google.maps.Marker({
-                    position: latLng,
-                    map: map,
-                    title: locationName,
-                    animation: google.maps.Animation.DROP,
-                  });
-                  marker.addListener("click", function () {
-                    infowindow.open(map, marker);
-                  });
-                  map.addListener("click", function () {
-                    infowindow.close();
-                  });
+                    //create info window and append to marker
+                    var contentString =
+                      '<div id="infoWindowContent">' +
+                      '<div id="siteNotice">' +
+                      "</div>" +
+                      '<h1 id="firstHeading" class="firstHeading">' +
+                      locationName +
+                      "</h1>" +
+                      '<div id="infoWindowBodyContent">' +
+                      '<p class="infoWindowParagraph">' +
+                      locationDescription +
+                      "<br>" +
+                      "<p/>" +
+                      '<p class="infoWindowParagraph">' +
+                      "Address: " +
+                      readableStreetNameNumberCity +
+                      "<br>" +
+                      "Phone Number: " +
+                      phoneNumber +
+                      "</p>" +
+                      "</div>" +
+                      "</div>";
+                    var infowindow = new google.maps.InfoWindow({
+                      content: contentString,
+                    });
+
+                    //set marker using latLng
+                    var marker = new google.maps.Marker({
+                      position: latLng,
+                      map: map,
+                      title: locationName,
+                      animation: google.maps.Animation.DROP,
+                    });
+                    marker.addListener("click", function () {
+                      infowindow.open(map, marker);
+                    });
+                    map.addListener("click", function () {
+                      infowindow.close();
+                    });
+                  }
+                  makeMarkers();
                 }
               }
             }
