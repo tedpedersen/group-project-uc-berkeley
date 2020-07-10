@@ -57,7 +57,7 @@ function initMap() {
   });
   google.maps.event.addListenerOnce(map, 'tilesloaded', function () {
     $(this.getDiv()).animate({
-        opacity: 1
+      opacity: 1
     })
     $("#pac-card").animate({
       opacity: 1
@@ -169,85 +169,51 @@ function initMap() {
                     data[i].physical_address[0].address_1 +
                     ", " +
                     data[i].physical_address[0].city;
+
                   //get a latitude/longitude for each location in data array
-                  var streetNameAndNumber = data[
-                    i
-                  ].physical_address[0].address_1
-                    .split(" ")
-                    .join("+");
-                  var cityString = data[i].physical_address[0].city;
-                  cityString = cityString.replace(/\s+/g, "+");
-                  var geocodeUrl =
-                    "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-                    streetNameAndNumber +
-                    ",+" +
-                    cityString +
-                    ",+" +
-                    statesArray[i] +
-                    `&key=AIzaSyC5lO6ZjBp8Lwt5abqQ1GQBmVWxEerWGUY`;
-                  fetch(geocodeUrl).then(function (response) {
-                    if (response.ok) {
-                      response.json().then(function (data) {
-                        if (data.results.length > 0) {
-                          var currentLat =
-                            data.results[0].geometry.location.lat;
-                          var currentLng =
-                            data.results[0].geometry.location.lng;
-                          var latLng = { lat: currentLat, lng: currentLng };
+                  var latLng = geocodeData[locationName];
+                  
+                  //create info window and append to marker
+                  var contentString =
+                    '<div id="infoWindowContent">' +
+                    '<div id="siteNotice">' +
+                    "</div>" +
+                    '<h1 id="firstHeading" class="firstHeading">' +
+                    locationName +
+                    "</h1>" +
+                    '<div id="infoWindowBodyContent">' +
+                    '<p class="infoWindowParagraph">' +
+                    locationDescription +
+                    "<br>" +
+                    "<p/>" +
+                    '<p class="infoWindowParagraph">' +
+                    "Address: " +
+                    readableStreetNameNumberCity +
+                    "<br>" +
+                    "Phone Number: " +
+                    phoneNumber +
+                    "</p>" +
+                    "</div>" +
+                    "</div>";
+                  var infowindow = new google.maps.InfoWindow({
+                    content: contentString,
+                  });
 
-                          //create info window and append to marker
-                          var contentString =
-                            '<div id="infoWindowContent">' +
-                            '<div id="siteNotice">' +
-                            "</div>" +
-                            '<h1 id="firstHeading" class="firstHeading">' +
-                            locationName +
-                            "</h1>" +
-                            '<div id="infoWindowBodyContent">' +
-                            '<p class="infoWindowParagraph">' +
-                            locationDescription +
-                            "<br>" +
-                            "<p/>" +
-                            '<p class="infoWindowParagraph">' +
-                            "Address: " +
-                            readableStreetNameNumberCity +
-                            "<br>" +
-                            "Phone Number: " +
-                            phoneNumber +
-                            "</p>" +
-                            "</div>" +
-                            "</div>";
-                          var infowindow = new google.maps.InfoWindow({
-                            content: contentString,
-                          });
-
-                          //set marker using latLng
-                          var marker = new google.maps.Marker({
-                            position: latLng,
-                            map: map,
-                            title: locationName,
-                            animation: google.maps.Animation.DROP,
-                          });
-                          marker.addListener("click", function () {
-                            infowindow.open(map, marker);
-                          });
-                          map.addListener("click", function () {
-                            infowindow.close();
-                          });
-                        }
-                      });
-                    } else {
-                      alert("Error: " + response.statusText);
-                    }
+                  //set marker using latLng
+                  var marker = new google.maps.Marker({
+                    position: latLng,
+                    map: map,
+                    title: locationName,
+                    animation: google.maps.Animation.DROP,
+                  });
+                  marker.addListener("click", function () {
+                    infowindow.open(map, marker);
+                  });
+                  map.addListener("click", function () {
+                    infowindow.close();
                   });
                 }
               }
-
-              // if (data[i].phones === undefined) {
-              //   var phoneNumber = "Unknown";
-              // } else {
-              //   var phoneNumber = data[i].phones[0].number;
-              // }
             }
           });
         } else {
