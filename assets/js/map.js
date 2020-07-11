@@ -167,6 +167,7 @@ function initMap() {
                     data[i].physical_address[0].address_1 +
                     ", " +
                     data[i].physical_address[0].city;
+                    var phoneNumber = data[i].phones[0].number;
 
                   var makeMarkers = function () {
                     //get a latitude/longitude for each location in data array
