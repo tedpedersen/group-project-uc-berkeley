@@ -305,6 +305,7 @@ html, body {
 }
 #firstHeading {
     font-size: 20px;
+    margin-top: 5px;
 }
 
 #infoWindowBodyContent .infoWindowParagraph {
@@ -332,6 +333,9 @@ html, body {
 }
 #mobileNav{
     visibility: hidden;
+}
+.uk-table{
+    font-size: 12px;
 }
 /* Tablets and Smaller */
 @media screen and (max-width: 768px) {
