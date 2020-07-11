@@ -3,7 +3,7 @@
 ## Overview
 This app was created to provide information about the COVID-19 pandemic. This app uses the [Google Maps API][1] and a COVID-19 testing location hosted [on GitHub][2].
 
-**Live Link**: https://covid-19-datahub.herokuapp.com/index.html 
+**Live Link**: https://cvdatahub.com/
 
 ## Features
 - A database of COVID statistics organized by country. For each location, the data includes total confirmed cases, total active cases, total deaths, and total recoveries. The data is searchable by country.
