@@ -212,6 +212,14 @@ footer p {
     color: var(--light-text-color);
     opacity: .4;
 }
+footer a,
+footer a:visited,
+footer a:focus{
+    color: var(--light-text-color);
+}
+footer p a:hover{
+    color: #fff;
+}
 /* footer styles end */
 
 /* FROM GOOGLE MAPS */
