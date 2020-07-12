@@ -8,7 +8,7 @@ This app was created to provide information about the COVID-19 pandemic. This ap
 ## Features
 - A database of COVID statistics organized by country. For each location, the data includes total confirmed cases, total active cases, total deaths, and total recoveries. The data is searchable by country.
 - A map that shows locations of COVID testing centers accross the United States. The map is searchable, and for each location, provides information including the name, a description, their address, and their phone number. 
-- LocalStorage is used to store users searches to reduce redundancy when using the application.
+- LocalStorage is used to store users Staistic searches to reduce redundancy when using the application.
 
 ## Screen Shots:
 Home:
