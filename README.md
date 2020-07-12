@@ -18,10 +18,10 @@ Statistics:
 ![COVID Statistics Demo](https://raw.githubusercontent.com/tedpedersen/group-project-uc-berkeley/master/assets/img/01.png)
 
 Testing Centers:
-![COVID Testing Demo](https://raw.githubusercontent.com/tedpedersen/group-project-uc-berkeley/master/assets/img/03.png)
+![COVID Testing Demo](https://raw.githubusercontent.com/tedpedersen/group-project-uc-berkeley/master/assets/img/02.png)
 
 LocalStorage:
-![LocalStorage Demo](https://raw.githubusercontent.com/tedpedersen/group-project-uc-berkeley/master/assets/img/02.png)
+![LocalStorage Demo](https://raw.githubusercontent.com/tedpedersen/group-project-uc-berkeley/master/assets/img/04.png)
 
 [1]: <https://developers.google.com/maps/documentation> "Google Maps API"
 [2]: <https://github.com/covid-19-testing> "COVID API on GitHub"
